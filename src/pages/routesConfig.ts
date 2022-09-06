@@ -5,7 +5,7 @@ interface RouteConfigProps {
   path: string;
   component: React.ComponentType;
   current: boolean;
-  icon: React.ComponentType;
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   name: string;
 }
 

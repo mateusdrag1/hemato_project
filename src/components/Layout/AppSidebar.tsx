@@ -73,7 +73,7 @@ const AppSidebar = ({ sidebarOpen, setSidebarOpen }: AppSidebarProps) => {
                         'group flex items-center px-2 py-2 text-base font-medium rounded-md',
                       )}
                     >
-                      {/* <item.icon
+                      <item.icon
                         className={classNames(
                           item.current
                             ? 'text-gray-300'
@@ -81,7 +81,7 @@ const AppSidebar = ({ sidebarOpen, setSidebarOpen }: AppSidebarProps) => {
                           'mr-4 flex-shrink-0 h-6 w-6',
                         )}
                         aria-hidden='true'
-                      /> */}
+                      />
                       {item.name}
                     </a>
                   ))}
@@ -114,10 +114,10 @@ const AppSidebar = ({ sidebarOpen, setSidebarOpen }: AppSidebarProps) => {
                   )}
                 >
                   <item.icon
-                    // className={classNames(
-                    //   item.current ? 'text-gray-300' : 'text-gray-400 group-hover:text-gray-300',
-                    //   'mr-3 flex-shrink-0 h-6 w-6',
-                    // )}
+                    className={classNames(
+                      item.current ? 'text-gray-300' : 'text-gray-400 group-hover:text-gray-300',
+                      'mr-3 flex-shrink-0 h-6 w-6',
+                    )}
                     aria-hidden='true'
                   />
                   {item.name}
