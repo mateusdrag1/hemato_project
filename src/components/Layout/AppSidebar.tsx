@@ -99,9 +99,9 @@ const AppSidebar = ({ sidebarOpen, setSidebarOpen }: AppSidebarProps) => {
           <div className='flex-1 flex flex-col overflow-y-auto'>
             <nav className='flex-1 px-2 py-4 space-y-1'>
               {routesConfig.map((item) => (
-                <Link
+                <a
                   key={item.name}
-                  to={item.path}
+                  href={item.path}
                   className={classNames(
                     item.current
                       ? 'bg-gray-900 text-white'
@@ -117,7 +117,7 @@ const AppSidebar = ({ sidebarOpen, setSidebarOpen }: AppSidebarProps) => {
                     aria-hidden='true'
                   />
                   {item.name}
-                </Link>
+                </a>
               ))}
             </nav>
           </div>
