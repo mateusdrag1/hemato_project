@@ -1,5 +1,6 @@
 import { Laminas } from '@/components/Laminas';
 import AppContainer from '@/components/Layout/AppContainer';
+import classNames from '@/utils/classNames';
 import { FC, useEffect, useState } from 'react';
 
 interface Laminario {
@@ -14,6 +15,9 @@ interface Laminario {
 
 const Laminario: FC = () => {
   const [bloodSmear, setBloodSmear] = useState<Laminario[]>([]);
+  const [errors, setErrors] = useState<{
+    [key: string]: string;
+  }>({});
 
   const clearAllFields = () => {
     const inputs = document.querySelectorAll('input');
@@ -24,11 +28,14 @@ const Laminario: FC = () => {
   };
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    setErrors({});
     e.preventDefault();
 
     const data = new FormData(e.currentTarget);
 
     if (data.get('laminaID') === '') {
+      setErrors({ laminaID: 'O ID da lâmina é obrigatório' });
+
       alert('O ID da lâmina é obrigatório');
       return;
     }
@@ -42,6 +49,33 @@ const Laminario: FC = () => {
       monocitos: Number(data.get('monocitos')),
       data: new Intl.DateTimeFormat('pt-BR').format(new Date()),
     };
+
+    if (
+      Number.isNaN(lamina.segmentados) ||
+      Number.isNaN(lamina.eosinofilos) ||
+      Number.isNaN(lamina.bastonetes) ||
+      Number.isNaN(lamina.linfocitos) ||
+      Number.isNaN(lamina.monocitos)
+    ) {
+      setErrors({
+        all: 'Os valores devem ser números',
+      });
+      alert('Os valores devem ser números');
+      return;
+    }
+
+    if (
+      lamina.segmentados +
+        lamina.eosinofilos +
+        lamina.bastonetes +
+        lamina.linfocitos +
+        lamina.monocitos !==
+      100
+    ) {
+      setErrors({ all: 'A soma dos valores deve ser igual a 100' });
+      alert('A soma dos valores deve ser igual a 100');
+      return;
+    }
 
     setBloodSmear((prev) => [...prev, lamina]);
   };
@@ -63,6 +97,7 @@ const Laminario: FC = () => {
                 <p className='mt-1 text-sm text-gray-500'>
                   Aqui você adiciona sua lâmina de paciente, com os dados da lâmina e imagens.
                 </p>
+                {errors.all && <p className='text-red-500'>{errors.all}</p>}
               </div>
               <div className='mt-5 md:mt-0 md:col-span-2'>
                 <div className='space-y-6'>
@@ -75,8 +110,12 @@ const Laminario: FC = () => {
                         type='text'
                         name='laminaID'
                         id='laminaID'
-                        className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
+                        className={classNames(
+                          'mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md',
+                          errors.laminaID && 'border-red-500',
+                        )}
                       />
+                      {errors.laminaID && <p className='text-red-500 text-sm'>{errors.laminaID}</p>}
                     </div>
                     <div className='col-span-2 sm:col-span-2'>
                       <label
