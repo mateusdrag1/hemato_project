@@ -120,20 +120,7 @@ const Laminario: FC = () => {
                         className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
                       />
                     </div>
-                    <div className='col-span-2 sm:col-span-2'>
-                      <label
-                        htmlFor='bastonetes'
-                        className='block text-sm font-medium text-gray-700'
-                      >
-                        QTD de Bastonetes
-                      </label>
-                      <input
-                        type='text'
-                        name='bastonetes'
-                        id='bastonetes'
-                        className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
-                      />
-                    </div>
+
                     <div className='col-span-2 sm:col-span-2'>
                       <label
                         htmlFor='linfocitos'
