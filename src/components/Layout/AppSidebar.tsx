@@ -3,7 +3,6 @@ import classNames from '@/utils/classNames';
 import { Dialog, Transition } from '@headlessui/react';
 import { XIcon } from '@heroicons/react/outline';
 import { Fragment } from 'react';
-import { Link } from 'react-router-dom';
 
 interface AppSidebarProps {
   sidebarOpen: boolean;
