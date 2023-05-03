@@ -1,5 +1,6 @@
-import { HomeIcon } from '@heroicons/react/outline';
+import { HomeIcon, LockOpenIcon } from '@heroicons/react/outline';
 import Index from './Index';
+import { Laminario } from './Laminario';
 
 interface RouteConfigProps {
   path: string;
@@ -19,5 +20,12 @@ export const routesConfig: RouteConfigProps[] = [
     component: Index,
     icon: HomeIcon,
     current: currentRoute === '/',
+  },
+  {
+    name: 'Lâminário',
+    path: '/laminas',
+    component: Laminario,
+    icon: LockOpenIcon,
+    current: currentRoute === '/laminas',
   },
 ];
