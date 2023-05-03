@@ -3,6 +3,7 @@ import classNames from '@/utils/classNames';
 import { Dialog, Transition } from '@headlessui/react';
 import { XIcon } from '@heroicons/react/outline';
 import { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 
 interface AppSidebarProps {
   sidebarOpen: boolean;
@@ -98,9 +99,9 @@ const AppSidebar = ({ sidebarOpen, setSidebarOpen }: AppSidebarProps) => {
           <div className='flex-1 flex flex-col overflow-y-auto'>
             <nav className='flex-1 px-2 py-4 space-y-1'>
               {routesConfig.map((item) => (
-                <a
+                <Link
                   key={item.name}
-                  href={item.path}
+                  to={item.path}
                   className={classNames(
                     item.current
                       ? 'bg-gray-900 text-white'
@@ -116,7 +117,7 @@ const AppSidebar = ({ sidebarOpen, setSidebarOpen }: AppSidebarProps) => {
                     aria-hidden='true'
                   />
                   {item.name}
-                </a>
+                </Link>
               ))}
             </nav>
           </div>
