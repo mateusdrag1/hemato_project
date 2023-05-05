@@ -5,10 +5,11 @@ import {
   reviewMonocytes,
   reviewNeutrophils,
 } from '@/utils/calculos';
+import { TrashIcon } from '@heroicons/react/outline';
 import { FC } from 'react';
 
 interface LaminasProps {
-  sequence: number;
+  removeSmear: (smear_id: string) => void;
   laminaID: string;
   segmentados: number;
   eosinofilos: number;
@@ -19,7 +20,6 @@ interface LaminasProps {
 }
 
 export const Laminas: FC<LaminasProps> = ({
-  sequence,
   laminaID,
   bastonetes,
   data,
@@ -27,15 +27,20 @@ export const Laminas: FC<LaminasProps> = ({
   linfocitos,
   monocitos,
   segmentados,
+  removeSmear,
 }) => {
   return (
     <div className='bg-white shadow px-4 py-5 sm:rounded-lg sm:p-6 mt-8'>
       <div className='flex justify-between'>
-        <h3 className='text-lg leading-6 font-medium text-gray-900'>Lâmina {sequence}</h3>
-        <p className='mt-1 max-w-2xl text-sm text-gray-500'>ID: {laminaID}</p>
+        <h3 className='text-lg leading-6 font-medium text-gray-900'>Lâmina {laminaID}</h3>
+
         <span className='inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800'>
           {data}
         </span>
+
+        <button onClick={() => removeSmear(laminaID)} className='text-red-500'>
+          <TrashIcon className='h-6 w-6' />
+        </button>
       </div>
       <div className='mt-2 sm:flex sm:justify-between'>
         <div className='mt-2 flex flex-col items-start text-sm text-gray-500 sm:mt-0'>

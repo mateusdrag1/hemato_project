@@ -34,7 +34,7 @@ const AppSidebar = ({ sidebarOpen, setSidebarOpen }: AppSidebarProps) => {
             leaveFrom='translate-x-0'
             leaveTo='-translate-x-full'
           >
-            <div className='relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-gray-800'>
+            <div className='relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-[#0065B2]'>
               <Transition.Child
                 as={Fragment}
                 enter='ease-in-out duration-300'
@@ -66,16 +66,14 @@ const AppSidebar = ({ sidebarOpen, setSidebarOpen }: AppSidebarProps) => {
                       href={item.path}
                       className={classNames(
                         item.current
-                          ? 'bg-gray-900 text-white'
-                          : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                          ? 'text-[#0065B2] bg-white'
+                          : 'text-white hover:bg-white hover:text-[#0065B2]',
                         'group flex items-center px-2 py-2 text-base font-medium rounded-md',
                       )}
                     >
                       <item.icon
                         className={classNames(
-                          item.current
-                            ? 'text-gray-300'
-                            : 'text-gray-400 group-hover:text-gray-300',
+                          item.current ? 'text-gray-900' : 'text-white group-hover:text-[#0065B2]',
                           'mr-4 flex-shrink-0 h-6 w-6',
                         )}
                         aria-hidden='true'
@@ -91,8 +89,8 @@ const AppSidebar = ({ sidebarOpen, setSidebarOpen }: AppSidebarProps) => {
         </Dialog>
       </Transition.Root>
       <div className='hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0'>
-        <div className='flex-1 flex flex-col min-h-0 bg-gray-800'>
-          <div className='flex items-center h-16 flex-shrink-0 px-4 bg-gray-900'>
+        <div className='flex-1 flex flex-col min-h-0 bg-[#0065B2]'>
+          <div className='flex items-center h-16 flex-shrink-0 px-4 bg-[#043961]'>
             <p className='text-white'>Hematopedia</p>
           </div>
           <div className='flex-1 flex flex-col overflow-y-auto'>
@@ -103,14 +101,14 @@ const AppSidebar = ({ sidebarOpen, setSidebarOpen }: AppSidebarProps) => {
                   href={item.path}
                   className={classNames(
                     item.current
-                      ? 'bg-gray-900 text-white'
-                      : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                      ? 'bg-white text-[#0065B2]'
+                      : 'text-white hover:bg-white hover:text-[#0065B2]',
                     'group flex items-center px-2 py-2 text-sm font-medium rounded-md',
                   )}
                 >
                   <item.icon
                     className={classNames(
-                      item.current ? 'text-gray-300' : 'text-gray-400 group-hover:text-gray-300',
+                      item.current ? 'text-[#0065B2]' : 'text-white group-hover:text-[#0065B2]',
                       'mr-3 flex-shrink-0 h-6 w-6',
                     )}
                     aria-hidden='true'

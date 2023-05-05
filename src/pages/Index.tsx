@@ -1,187 +1,55 @@
 import AppContainer from '@/components/Layout/AppContainer';
-import { CHCM, HCM, VCM } from '@/utils/calculos';
+import { RBCForm } from '@/components/RBCForm';
+import { CreateRBCFormData } from '@/components/RBCForm/validate';
+import { ResultRBC } from '@/components/ResultRBC';
+
 import { useState } from 'react';
 
-interface Pacient {
-  hemacias: number;
-  hematocrito: number;
-  hemoglobina: number;
-  idade: number;
-  nome: string;
-  rdw: number;
-  sexo: string;
+export interface Patient extends CreateRBCFormData {
+  created_at: string;
 }
 
 const Index = () => {
-  const [pacient, setPacient] = useState<Pacient | null>(null);
+  const [patients, setPatients] = useState<Patient[]>(
+    localStorage.getItem('patients') ? JSON.parse(localStorage.getItem('patients') as string) : [],
+  );
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const data = {
-      hemacias: parseFloat(e.currentTarget.hemacias.value),
-      hematocrito: parseFloat(e.currentTarget.hematocrito.value),
-      hemoglobina: parseFloat(e.currentTarget.hemoglobina.value),
-      idade: parseInt(e.currentTarget.idade.value),
-      nome: e.currentTarget.nome.value,
-      rdw: parseFloat(e.currentTarget.rdw.value),
-      sexo: e.currentTarget.sexo.value,
+  const handleSubmit = (data: CreateRBCFormData) => {
+    const patientWithDate = {
+      ...data,
+      created_at: new Intl.DateTimeFormat('pt-BR').format(new Date()),
     };
 
-    setPacient(data);
+    if (patients.filter((patient) => patient.smear_id === patientWithDate.smear_id).length > 0) {
+      alert('Já existe um paciente com esse ID');
+      return;
+    }
+
+    setPatients((old) => [...old, patientWithDate]);
+
+    localStorage.setItem('patients', JSON.stringify([...patients, patientWithDate]));
+  };
+
+  const removeSmear = (smear_id: string) => {
+    const newPatients = patients.filter((patient) => patient.smear_id !== smear_id);
+
+    setPatients(newPatients);
+
+    localStorage.setItem('patients', JSON.stringify(newPatients));
   };
 
   return (
     <AppContainer title='Série Eritrocitária'>
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <div className='space-y-6'>
-          <div className='bg-white shadow px-4 py-5 sm:rounded-lg sm:p-6'>
-            <div className='md:grid md:grid-cols-3 md:gap-6'>
-              <div className='md:col-span-1'>
-                <h3 className='text-lg font-medium leading-6 text-gray-900'>Paciente</h3>
-                <p className='mt-1 text-sm text-gray-500'>
-                  Aqui você descreve o paciente e o motivo da consulta.
-                </p>
-              </div>
-              <div className='mt-5 md:mt-0 md:col-span-2'>
-                <div className='space-y-6'>
-                  <div className='grid grid-cols-6 gap-6'>
-                    <div className='col-span-6 sm:col-span-3'>
-                      <label htmlFor='nome' className='block text-sm font-medium text-gray-700'>
-                        Nome do Paciente
-                      </label>
-                      <input
-                        type='text'
-                        name='nome'
-                        id='nome'
-                        autoComplete='given-name'
-                        className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
-                      />
-                    </div>
-                    <div className='col-span-6 sm:col-span-3'>
-                      <label htmlFor='idade' className='block text-sm font-medium text-gray-700'>
-                        Idade do paciente
-                      </label>
-                      <input
-                        type='text'
-                        name='idade'
-                        id='idade'
-                        className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
-                      />
-                    </div>
-                    <div className='col-span-6 sm:col-span-3'>
-                      <label htmlFor='sexo' className='block text-sm font-medium text-gray-700'>
-                        Sexo
-                      </label>
-                      <select
-                        id='sexo'
-                        name='sexo'
-                        autoComplete='sexo'
-                        className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
-                      >
-                        <option value={'M'}>Masculino</option>
-                        <option value={'F'}>Feminino</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+      <RBCForm onSubmit={handleSubmit} />
 
-          <div className='bg-white shadow px-4 py-5 sm:rounded-lg sm:p-6'>
-            <div className='md:grid md:grid-cols-3 md:gap-6'>
-              <div className='md:col-span-1'>
-                <h3 className='text-lg font-medium leading-6 text-gray-900'>
-                  Informações sobre série vermelha
-                </h3>
-                <p className='mt-1 text-sm text-gray-500'>
-                  São campos de exame da série vermelha, que ao indivar, será feita uma análise.
-                </p>
-              </div>
-              <div className='mt-5 md:mt-0 md:col-span-2'>
-                <div>
-                  <div className='grid grid-cols-6 gap-6'>
-                    <div className='col-span-6 sm:col-span-6 lg:col-span-2'>
-                      <label htmlFor='hemacias' className='block text-sm font-medium text-gray-700'>
-                        Hemácias
-                      </label>
-                      <input
-                        type='text'
-                        name='hemacias'
-                        id='hemacias'
-                        autoComplete='address-level2'
-                        className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
-                      />
-                    </div>
+      <div className='md:grid md:grid-cols-3 md:gap-6'>
+        {patients.length > 0 &&
+          patients.map((patient) => (
+            <ResultRBC key={patient.smear_id} patient={patient} removeSmear={removeSmear} />
+          ))}
+      </div>
 
-                    <div className='col-span-6 sm:col-span-3 lg:col-span-2'>
-                      <label
-                        htmlFor='hemoglobina'
-                        className='block text-sm font-medium text-gray-700'
-                      >
-                        Hemoglobina
-                      </label>
-                      <input
-                        type='text'
-                        name='hemoglobina'
-                        id='hemoglobina'
-                        autoComplete='address-level1'
-                        className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
-                      />
-                    </div>
-
-                    <div className='col-span-6 sm:col-span-3 lg:col-span-2'>
-                      <label
-                        htmlFor='hematocrito'
-                        className='block text-sm font-medium text-gray-700'
-                      >
-                        Hematocrito
-                      </label>
-                      <input
-                        type='text'
-                        name='hematocrito'
-                        id='hematocrito'
-                        className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
-                      />
-                    </div>
-
-                    <div className='col-span-6 sm:col-span-3 lg:col-span-2'>
-                      <label htmlFor='rdw' className='block text-sm font-medium text-gray-700'>
-                        RDW
-                      </label>
-                      <input
-                        type='text'
-                        name='rdw'
-                        id='rdw'
-                        className='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className='flex justify-end'>
-            <a
-              type='button'
-              href='/'
-              className='bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
-            >
-              Cancelar
-            </a>
-            <button
-              type='submit'
-              className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
-            >
-              Fazer os cálculos e gerar laudo
-            </button>
-          </div>
-        </div>
-      </form>
-
-      {pacient && (
+      {/* {pacient && (
         <div className='mt-5 md:mt-0 md:col-span-2 py-6'>
           <div className='px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg'>
             <h3 className='text-lg font-medium leading-6 text-gray-900'>Resultado</h3>
@@ -296,7 +164,7 @@ const Index = () => {
             </div>
           </div>
         </div>
-      )}
+      )} */}
     </AppContainer>
   );
 };

@@ -34,11 +34,10 @@ const AppNavbar = ({ setSidebarOpen }: AppNavbarProps) => {
             <div>
               <Menu.Button className='max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
                 <span className='sr-only'>Open user menu</span>
-                <img
-                  className='h-8 w-8 rounded-full'
-                  src='https://cataas.com/cat/says/hello%20world!'
-                  alt=''
-                />
+
+                <div className='relative inline-flex items-center justify-center w-8 h-8 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600'>
+                  <span className='font-medium text-gray-600 dark:text-gray-300'>SN</span>
+                </div>
               </Menu.Button>
             </div>
             <Transition
