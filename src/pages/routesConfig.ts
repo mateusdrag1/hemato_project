@@ -1,15 +1,8 @@
-import {
-  BookmarkAltIcon,
-  BookmarkIcon,
-  DatabaseIcon,
-  HomeIcon,
-  UserGroupIcon,
-} from '@heroicons/react/outline';
+import { BookmarkAltIcon, BookmarkIcon, DatabaseIcon, HomeIcon } from '@heroicons/react/outline';
 import Index from './Index';
 import { Laminario } from './Laminario';
 import { Platelet } from './Platelet';
 import { Dashboard } from './Dashboard';
-import { Patients } from './Patients';
 
 interface RouteConfigProps {
   path: string;
