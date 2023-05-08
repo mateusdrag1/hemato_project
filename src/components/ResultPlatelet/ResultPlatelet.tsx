@@ -15,6 +15,22 @@ export const ResultPlatelet: React.FC<{
     }
   };
 
+  const plateletsDescription = () => {
+    if (plateletsPatients.platelets < 150000) {
+      return `A trombocitopenia, que é a redução nas plaquetas circulantes (abaixo
+        de 150.000), surge na maioria das vezes de uma ou duas causas gerias. Formação deficiente
+        de plaquetas (como em estados aplásticos, efeito de quimioterapia mielotóxica e por
+        sensibilidade a droga), e uma destruição aumentada de plaquetas na circulação e no baço
+        (originária geralmente de uma sensibilização auto- imune das plaquetas, tornando-as sujeitas
+        a fagocitose por macrófagos).`;
+    } else if (plateletsPatients.platelets > 450000) {
+      return `A trombocitose, que é o aumento nas plaquetas circulantes (acima de 450.000), é denominado
+      trombocitose, e correlaciona-se com formação de trombos intravasculares`;
+    } else {
+      return `A contagem normal de plaquetas é de 150.000 a 450.000 por mm3.`;
+    }
+  };
+
   return (
     <Result
       created_at={plateletsPatients.created_at}
@@ -26,7 +42,9 @@ export const ResultPlatelet: React.FC<{
           Plaquetas:{' '}
           <span className='ml-1 font-medium text-gray-900'>{plateletsPatients.platelets}</span>
         </div>
-        <span className='font-medium text-gray-900'>{plateletsResult()} - </span>
+        <span className='font-medium text-gray-900'>
+          {plateletsResult()} - {plateletsDescription()}
+        </span>
       </div>
     </Result>
   );
