@@ -1,6 +1,6 @@
 import classNames from '@/utils/classNames';
 import { Menu, Transition } from '@headlessui/react';
-import { BellIcon, MenuAlt2Icon } from '@heroicons/react/outline';
+import { Bars2Icon, BellIcon } from '@heroicons/react/24/outline';
 import { Fragment } from 'react';
 import { ProfileLinks } from '../constants/ProfileLinks';
 
@@ -17,7 +17,7 @@ const AppNavbar = ({ setSidebarOpen }: AppNavbarProps) => {
         onClick={() => setSidebarOpen(true)}
       >
         <span className='sr-only'>Open sidebar</span>
-        <MenuAlt2Icon className='h-6 w-6' aria-hidden='true' />
+        <Bars2Icon className='h-6 w-6' aria-hidden='true' />
       </button>
       <div className='flex-1 px-4 flex justify-between'>
         <div className='flex-1 flex'></div>

@@ -1,7 +1,8 @@
 import { routesConfig } from '@/pages/routesConfig';
 import classNames from '@/utils/classNames';
 import { Dialog, Transition } from '@headlessui/react';
-import { XIcon } from '@heroicons/react/outline';
+import { XMarkIcon } from '@heroicons/react/24/outline';
+
 import { Fragment } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
@@ -54,7 +55,7 @@ const AppSidebar = ({ sidebarOpen, setSidebarOpen }: AppSidebarProps) => {
                     onClick={() => setSidebarOpen(false)}
                   >
                     <span className='sr-only'>Close sidebar</span>
-                    <XIcon className='h-6 w-6 text-white' aria-hidden='true' />
+                    <XMarkIcon className='h-6 w-6 text-white' aria-hidden='true' />
                   </button>
                 </div>
               </Transition.Child>

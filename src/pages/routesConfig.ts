@@ -1,4 +1,4 @@
-import { BookmarkAltIcon, BookmarkIcon, DatabaseIcon, HomeIcon } from '@heroicons/react/outline';
+import { BookmarkIcon, CircleStackIcon, HomeIcon } from '@heroicons/react/24/outline';
 
 import { WBC } from './WBC';
 import { Platelet } from './Platelet';
@@ -8,7 +8,7 @@ import { RBC } from './RBC';
 interface RouteConfigProps {
   path: string;
   component: React.ComponentType;
-  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  icon: typeof BookmarkIcon;
   name: string;
 }
 
@@ -17,7 +17,7 @@ export const routesConfig: RouteConfigProps[] = [
     name: 'Dashboard',
     path: '/',
     component: Dashboard,
-    icon: DatabaseIcon,
+    icon: CircleStackIcon,
   },
   {
     name: 'Série Eritrocitária',
@@ -35,6 +35,6 @@ export const routesConfig: RouteConfigProps[] = [
     name: 'Série Plaquetária',
     path: '/plaquetas',
     component: Platelet,
-    icon: BookmarkAltIcon,
+    icon: BookmarkIcon,
   },
 ];
