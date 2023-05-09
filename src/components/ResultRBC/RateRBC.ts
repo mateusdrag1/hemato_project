@@ -1,10 +1,10 @@
 export const erythrocytes = (erythrocytes: number) => {
-  if (erythrocytes < 3.8) {
-    return 'Anemia';
-  } else if (erythrocytes >= 3.8 && erythrocytes <= 5.9) {
+  if (erythrocytes < 4.1) {
+    return 'Oligocitemia (Anemias)';
+  } else if (erythrocytes <= 6.1) {
     return 'Normal';
   } else {
-    return 'Policitemia';
+    return 'Poliglobulia (Neoplasias mieloproliferativas / Desidratação)';
   }
 };
 
