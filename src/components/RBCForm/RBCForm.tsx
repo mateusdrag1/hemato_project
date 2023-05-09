@@ -25,7 +25,7 @@ export const RBCForm: React.FC<{
               </span>
             </header>
 
-            <div className='grid grid-cols-2 md:grid-cols-12 gap-6'>
+            <div className='flex flex-wrap gap-6'>
               <Form.Field>
                 <Form.Label htmlFor='smear_id'>Número da Lâmina</Form.Label>
                 <Form.Input type='text' name='smear_id' />
@@ -38,7 +38,13 @@ export const RBCForm: React.FC<{
               </Form.Field>
               <Form.Field>
                 <Form.Label htmlFor='gender'>Sexo</Form.Label>
-                <Form.Input type='text' name='gender' />
+                <Form.Select name='gender'>
+                  <option value='' disabled selected hidden>
+                    Selecione
+                  </option>
+                  <option value='M'>Masculino</option>
+                  <option value='F'>Feminino</option>
+                </Form.Select>
                 <Form.ErrorMessage field='gender' />
               </Form.Field>
             </div>
@@ -54,7 +60,7 @@ export const RBCForm: React.FC<{
               </span>
             </header>
 
-            <div className='grid grid-cols-2 md:grid-cols-12 gap-6'>
+            <div className='flex flex-wrap gap-6'>
               <Form.Field>
                 <Form.Label htmlFor='erythrocytes'>Eritrócitos (milhões/µL) </Form.Label>
                 <Form.Input type='text' name='erythrocytes' />

@@ -27,7 +27,7 @@ export const PlateletForm: React.FC<{
               </span>
             </header>
 
-            <div className='grid grid-cols-2 md:grid-cols-12 gap-6'>
+            <div className='flex flex-wrap gap-6'>
               <Form.Field>
                 <Form.Label htmlFor='smear_id'>Número da Lâmina</Form.Label>
                 <Form.Input type='text' name='smear_id' />

@@ -38,7 +38,7 @@ const AppSidebar = ({ sidebarOpen, setSidebarOpen }: AppSidebarProps) => {
             leaveFrom='translate-x-0'
             leaveTo='-translate-x-full'
           >
-            <div className='relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-[#0065B2]'>
+            <div className='relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-white'>
               <Transition.Child
                 as={Fragment}
                 enter='ease-in-out duration-300'
@@ -59,27 +59,27 @@ const AppSidebar = ({ sidebarOpen, setSidebarOpen }: AppSidebarProps) => {
                   </button>
                 </div>
               </Transition.Child>
-              <div className='flex-shrink-0 flex items-center px-4'>
-                <p className='text-white'>HematoPedia</p>
+              <div className='flex-shrink-0 flex items-center px-4 mb-5'>
+                <img src='/LogoHemato.svg' alt='' srcSet='' />
               </div>
               <div className='mt-5 flex-1 h-0 overflow-y-auto'>
-                <nav className='px-2 space-y-1'>
+                <nav className='px-2 space-y-8'>
                   {routesConfig.map((item) => (
                     <Link
                       key={item.name}
                       to={item.path}
                       className={classNames(
                         location.pathname === item.path
-                          ? 'text-[#0065B2] bg-white'
-                          : 'text-white hover:bg-white hover:text-[#0065B2]',
+                          ? 'bg-gray-100 text-red-600'
+                          : 'text-gray-400 hover:bg-gray-100 hover:text-red-600',
                         'group flex items-center px-2 py-2 text-base font-medium rounded-md',
                       )}
                     >
                       <item.icon
                         className={classNames(
                           location.pathname === item.path
-                            ? 'text-gray-900'
-                            : 'text-white group-hover:text-[#0065B2]',
+                            ? 'text-red-600'
+                            : 'text-gray-400 group-hover:text-red-600',
                           'mr-4 flex-shrink-0 h-6 w-6',
                         )}
                         aria-hidden='true'
@@ -95,28 +95,28 @@ const AppSidebar = ({ sidebarOpen, setSidebarOpen }: AppSidebarProps) => {
         </Dialog>
       </Transition.Root>
       <div className='hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0'>
-        <div className='flex-1 flex flex-col min-h-0 bg-[#0065B2]'>
-          <div className='flex items-center h-16 flex-shrink-0 px-4 bg-[#043961]'>
-            <p className='text-white'>Hematopedia</p>
+        <div className='flex-1 flex flex-col min-h-0 bg-white rounded-e-2xl'>
+          <div className='flex items-center h-32 flex-shrink-0 px-4'>
+            <img src='/LogoHemato.svg' alt='' srcSet='' />
           </div>
           <div className='flex-1 flex flex-col overflow-y-auto'>
-            <nav className='flex-1 px-2 py-4 space-y-1'>
+            <nav className='flex-1 px-2 py-4 space-y-6'>
               {routesConfig.map((item) => (
                 <Link
                   key={item.name}
                   to={item.path}
                   className={classNames(
                     location.pathname === item.path
-                      ? 'bg-white text-[#0065B2]'
-                      : 'text-white hover:bg-white hover:text-[#0065B2]',
-                    'group flex items-center px-2 py-2 text-sm font-medium rounded-md',
+                      ? 'bg-gray-100 text-red-600'
+                      : 'text-gray-400 hover:bg-gray-100 hover:text-red-600',
+                    'group flex items-center px-5 py-5 text-sm font-medium rounded-md',
                   )}
                 >
                   <item.icon
                     className={classNames(
                       location.pathname === item.path
-                        ? 'text-[#0065B2]'
-                        : 'text-white group-hover:text-[#0065B2]',
+                        ? 'text-red-600'
+                        : 'text-gray-400 group-hover:text-red-600',
                       'mr-3 flex-shrink-0 h-6 w-6',
                     )}
                     aria-hidden='true'

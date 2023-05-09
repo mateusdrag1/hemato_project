@@ -1,4 +1,4 @@
-import { BookmarkIcon, CircleStackIcon, HomeIcon } from '@heroicons/react/24/outline';
+import { BookmarkIcon, CircleStackIcon, CubeIcon, HomeIcon } from '@heroicons/react/24/outline';
 
 import { WBC } from './WBC';
 import { Platelet } from './Platelet';
@@ -35,6 +35,6 @@ export const routesConfig: RouteConfigProps[] = [
     name: 'Série Plaquetária',
     path: '/plaquetas',
     component: Platelet,
-    icon: BookmarkIcon,
+    icon: CubeIcon,
   },
 ];

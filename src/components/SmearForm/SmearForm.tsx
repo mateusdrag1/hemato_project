@@ -49,19 +49,20 @@ export const SmearForm: React.FC<{
   return (
     <FormProvider {...createSmearForm}>
       <div className='space-y-6'>
-        <div className='bg-white shadow px-4 py-5 sm:rounded-lg sm:p-6'>
-          <header className='mb-5 flex-col flex'>
-            <h2 className='text-lg leading-6 font-medium text-gray-900'>Contagem diferencial</h2>
-            <span className='mt-1 text-sm text-gray-500'>
-              Aqui você adiciona sua lâmina de paciente, com os dados da lâmina e imagens.
-            </span>
-            <span className='text-red-400 text-xs'>
-              Todos os campos estão marcados como no mínimo 0 e no máximo 100. A soma dos valores
-              deve ser igual a 100.
-            </span>
-          </header>
-          <form onSubmit={handleSubmit(createSmear)}>
-            <div className='grid grid-cols-2 md:grid-cols-12 gap-6'>
+        <form onSubmit={handleSubmit(createSmear)}>
+          <div className='bg-white shadow px-4 py-5 sm:rounded-lg sm:p-6'>
+            <header className='mb-5 flex-col flex'>
+              <h2 className='text-lg leading-6 font-medium text-gray-900'>Contagem diferencial</h2>
+              <span className='mt-1 text-sm text-gray-500'>
+                Aqui você adiciona sua lâmina de paciente, com os dados da lâmina e imagens.
+              </span>
+              <span className='text-red-400 text-xs'>
+                Todos os campos estão marcados como no mínimo 0 e no máximo 100. A soma dos valores
+                deve ser igual a 100.
+              </span>
+            </header>
+
+            <div className='flex flex-wrap gap-6'>
               <Form.Field>
                 <Form.Label htmlFor='smear_id'>Número da Lâmina</Form.Label>
                 <Form.Input type='text' name='smear_id' />
@@ -93,16 +94,16 @@ export const SmearForm: React.FC<{
                 <Form.ErrorMessage field='monocytes' />
               </Form.Field>
             </div>
-            <div className='flex justify-end'>
-              <Button onClick={() => reset()} variant='secondary' type='button'>
-                Limpar campos
-              </Button>
-              <Button variant='primary' type='submit'>
-                Armazenar lâmina
-              </Button>
-            </div>
-          </form>
-        </div>
+          </div>
+          <div className='flex justify-end mt-5'>
+            <Button onClick={() => reset()} variant='secondary' type='button'>
+              Limpar campos
+            </Button>
+            <Button variant='primary' type='submit'>
+              Armazenar lâmina
+            </Button>
+          </div>
+        </form>
       </div>
     </FormProvider>
   );

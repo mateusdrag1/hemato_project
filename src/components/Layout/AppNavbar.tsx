@@ -3,14 +3,25 @@ import { Menu, Transition } from '@headlessui/react';
 import { Bars2Icon, BellIcon } from '@heroicons/react/24/outline';
 import { Fragment } from 'react';
 import { ProfileLinks } from '../constants/ProfileLinks';
+import { useLocation } from 'react-router-dom';
 
 interface AppNavbarProps {
   setSidebarOpen: (open: boolean) => void;
 }
 
 const AppNavbar = ({ setSidebarOpen }: AppNavbarProps) => {
+  const location = useLocation();
+
   return (
-    <div className='sticky top-0 z-10 flex-shrink-0 flex h-16 bg-white shadow'>
+    <div className='sticky md:static top-0 z-10 flex-shrink-0 flex h-16 bg-white md:bg-transparent'>
+      <div className='hidden md:flex px-16 py-8'>
+        <div className='flex items-center gap-3 text-sm font-light'>
+          Páginas <span className='text-gray-400'>/</span>
+          <span className='text-gray-500 first-letter:uppercase'>
+            {location.pathname === '/' ? 'dashboard' : location.pathname.replace('/', '')}
+          </span>
+        </div>
+      </div>
       <button
         type='button'
         className='px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden'
@@ -24,7 +35,7 @@ const AppNavbar = ({ setSidebarOpen }: AppNavbarProps) => {
         <div className='ml-4 flex items-center md:ml-6'>
           <button
             type='button'
-            className='bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+            className='p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
           >
             <span className='sr-only'>View notifications</span>
             <BellIcon className='h-6 w-6' aria-hidden='true' />
