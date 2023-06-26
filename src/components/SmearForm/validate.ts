@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 export const createSmearFormSchema = z.object({
-  smear_id: z.string().nonempty('O campo ID da lâmina é obrigatório.'),
+  blade: z.string().nonempty('O campo ID da lâmina é obrigatório.'),
   segmented_neutrophils: z.coerce
     .number()
     .nonnegative('O campo Segmentados é obrigatório.')

@@ -33,8 +33,8 @@ export const ResultPlatelet: React.FC<{
 
   return (
     <Result
-      created_at={plateletsPatients.created_at}
-      smear_id={plateletsPatients.smear_id}
+      createdAt={plateletsPatients.createdAt}
+      blade={plateletsPatients.blade}
       removeSmear={removePatient}
     >
       <div className='mt-2 flex flex-col items-start text-sm text-gray-500 sm:mt-0'>

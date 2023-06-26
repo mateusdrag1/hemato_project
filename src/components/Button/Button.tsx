@@ -1,4 +1,4 @@
-import classNames from '@/utils/classNames';
+import classNames from '@/core/utils/classNames';
 import { ComponentPropsWithoutRef } from 'react';
 
 type ButtonProps = {

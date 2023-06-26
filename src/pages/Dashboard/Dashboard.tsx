@@ -1,23 +1,28 @@
 import { Card } from '@/components/Card';
 import AppContainer from '@/components/Layout/AppContainer';
+import { api } from '@/configs';
 import {
   UserIcon,
   ClipboardDocumentCheckIcon,
   DocumentDuplicateIcon,
 } from '@heroicons/react/24/outline';
+import { useEffect, useState } from 'react';
 
 export const Dashboard: React.FC = () => {
-  const patients = localStorage.getItem('patients')
-    ? JSON.parse(localStorage.getItem('patients') as string)?.length
-    : 0;
+  const [patients, setPatients] = useState<any[]>([]);
+  const [bloodSmear, setBloodSmear] = useState<any[]>([]);
+  const [exams, setExams] = useState<any[]>([]);
 
-  const bloodSmear = localStorage.getItem('bloodSmear')
-    ? JSON.parse(localStorage.getItem('bloodSmear') as string)?.length
-    : 0;
+  useEffect(() => {
+    document.title = 'Hematopedia | Dashboard';
 
-  const exams = localStorage.getItem('exams')
-    ? JSON.parse(localStorage.getItem('exams') as string)?.length
-    : 0;
+    const getPatients = async () => {
+      const response = await api.get('/pacients');
+      setPatients(response.data.patients);
+    };
+
+    getPatients();
+  }, []);
 
   return (
     <AppContainer title='Dashboard'>
@@ -30,9 +35,9 @@ export const Dashboard: React.FC = () => {
         </span>
       </div>
       <header className='md:grid md:grid-cols-3 gap-6 space-y-5 md:space-y-0'>
-        <Card Icon={UserIcon} qtd={patients} title='Pacientes' color='blue' />
-        <Card Icon={DocumentDuplicateIcon} qtd={bloodSmear} title='Lâminas' color='red' />
-        <Card Icon={ClipboardDocumentCheckIcon} qtd={exams} title='Exames' color='green' />
+        <Card Icon={UserIcon} qtd={patients.length} title='Pacientes' color='blue' />
+        <Card Icon={DocumentDuplicateIcon} qtd={bloodSmear.length} title='Lâminas' color='red' />
+        <Card Icon={ClipboardDocumentCheckIcon} qtd={exams.length} title='Exames' color='green' />
       </header>
     </AppContainer>
   );

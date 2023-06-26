@@ -5,7 +5,7 @@ import { ResultPlatelet } from '@/components/ResultPlatelet';
 import { useState } from 'react';
 
 export interface PlateletsPatients extends CreatePlateletFormData {
-  created_at: string;
+  createdAt: string;
 }
 
 export const Platelet: React.FC = () => {
@@ -18,13 +18,10 @@ export const Platelet: React.FC = () => {
   const handleSubmit = (data: CreatePlateletFormData) => {
     const patientWithDate: PlateletsPatients = {
       ...data,
-      created_at: new Intl.DateTimeFormat('pt-BR').format(new Date()),
+      createdAt: new Intl.DateTimeFormat('pt-BR').format(new Date()),
     };
 
-    if (
-      plateletsPatients.filter((patient) => patient.smear_id === patientWithDate.smear_id).length >
-      0
-    ) {
+    if (plateletsPatients.filter((patient) => patient.blade === patientWithDate.blade).length > 0) {
       alert('Já existe um paciente com esse ID');
       return;
     }
@@ -38,10 +35,10 @@ export const Platelet: React.FC = () => {
   };
 
   const remove = (id: string) => {
-    setPlateletsPatients((old) => old.filter((patient) => patient.smear_id !== id));
+    setPlateletsPatients((old) => old.filter((patient) => patient.blade !== id));
     localStorage.setItem(
       'plateletsPatients',
-      JSON.stringify(plateletsPatients.filter((patient) => patient.smear_id !== id)),
+      JSON.stringify(plateletsPatients.filter((patient) => patient.blade !== id)),
     );
   };
 
@@ -53,7 +50,7 @@ export const Platelet: React.FC = () => {
         {plateletsPatients.length > 0 &&
           plateletsPatients.map((patient) => (
             <ResultPlatelet
-              key={patient.smear_id}
+              key={patient.blade}
               plateletsPatients={patient}
               removePatient={remove}
             />

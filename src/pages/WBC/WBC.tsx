@@ -4,7 +4,7 @@ import { SmearForm } from '@/components/SmearForm';
 import { CreateSmearFormData } from '@/components/SmearForm/validate';
 
 export interface BloodSmear extends CreateSmearFormData {
-  created_at: string;
+  createdAt: string;
 }
 
 import { FC, useState } from 'react';
@@ -16,8 +16,8 @@ const WBC: FC = () => {
       : [],
   );
 
-  const removeSmear = (smear_id: string) => {
-    const newBloodSmear = bloodSmear.filter((smear) => smear.smear_id !== smear_id);
+  const removeSmear = (blade: string) => {
+    const newBloodSmear = bloodSmear.filter((smear) => smear.blade !== blade);
 
     setBloodSmear(newBloodSmear);
 
@@ -33,11 +33,11 @@ const WBC: FC = () => {
           bloodSmear.map((bloodSmear) => (
             <ResultWBC
               removeSmear={removeSmear}
-              key={`${bloodSmear.created_at}${bloodSmear.smear_id}`}
+              key={`${bloodSmear.createdAt}${bloodSmear.blade}`}
               bastonetes={bloodSmear.rod}
-              data={bloodSmear.created_at}
+              data={bloodSmear.createdAt}
               eosinofilos={bloodSmear.eosinophils}
-              laminaID={bloodSmear.smear_id}
+              laminaID={bloodSmear.blade}
               linfocitos={bloodSmear.lymphocyte}
               monocitos={bloodSmear.monocytes}
               segmentados={bloodSmear.segmented_neutrophils}

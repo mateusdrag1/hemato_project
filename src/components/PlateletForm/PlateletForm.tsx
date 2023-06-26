@@ -29,9 +29,9 @@ export const PlateletForm: React.FC<{
 
             <div className='flex flex-wrap gap-6'>
               <Form.Field>
-                <Form.Label htmlFor='smear_id'>Número da Lâmina</Form.Label>
-                <Form.Input type='text' name='smear_id' />
-                <Form.ErrorMessage field='smear_id' />
+                <Form.Label htmlFor='blade'>Número da Lâmina</Form.Label>
+                <Form.Input type='text' name='blade' />
+                <Form.ErrorMessage field='blade' />
               </Form.Field>
               <Form.Field>
                 <Form.Label htmlFor='platelets'>Plaquetas do paciente</Form.Label>

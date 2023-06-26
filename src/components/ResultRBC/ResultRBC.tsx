@@ -15,9 +15,9 @@ export const ResultRBC: React.FC<{
 
   return (
     <Result
-      removeSmear={() => removeSmear(patient.smear_id)}
-      smear_id={patient.smear_id}
-      created_at={patient.created_at}
+      removeSmear={() => removeSmear(patient.blade)}
+      blade={patient.blade}
+      createdAt={patient.createdAt}
     >
       <div className='mt-2 flex flex-col items-start text-sm text-gray-500 sm:mt-0'>
         <div className='my-2'>

@@ -4,13 +4,13 @@ import {
   reviewLymphocytes,
   reviewMonocytes,
   reviewNeutrophils,
-} from '@/utils/calculos';
+} from '@/core/utils/calculos';
 
 import { FC } from 'react';
 import { Result } from '../Result/Result';
 
 interface ResultWBC {
-  removeSmear: (smear_id: string) => void;
+  removeSmear: (blade: string) => void;
   laminaID: string;
   segmentados: number;
   eosinofilos: number;
@@ -31,7 +31,7 @@ export const ResultWBC: FC<ResultWBC> = ({
   removeSmear,
 }) => {
   return (
-    <Result removeSmear={removeSmear} created_at={data} smear_id={laminaID}>
+    <Result removeSmear={removeSmear} createdAt={data} blade={laminaID}>
       <div className='mt-2 flex flex-col items-start text-sm text-gray-500 sm:mt-0'>
         <div className='my-2'>
           Segmentados:{' '}

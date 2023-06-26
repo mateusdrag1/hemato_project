@@ -1,4 +1,4 @@
-import classNames from '@/utils/classNames';
+import classNames from '@/core/utils/classNames';
 import { Menu, Transition } from '@headlessui/react';
 import { Bars2Icon, BellIcon } from '@heroicons/react/24/outline';
 import { Fragment } from 'react';

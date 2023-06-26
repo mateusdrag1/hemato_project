@@ -1,5 +1,5 @@
 import { routesConfig } from '@/pages/routesConfig';
-import classNames from '@/utils/classNames';
+import classNames from '@/core/utils/classNames';
 import { Dialog, Transition } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 
@@ -64,29 +64,31 @@ const AppSidebar = ({ sidebarOpen, setSidebarOpen }: AppSidebarProps) => {
               </div>
               <div className='mt-5 flex-1 h-0 overflow-y-auto'>
                 <nav className='px-2 space-y-8'>
-                  {routesConfig.map((item) => (
-                    <Link
-                      key={item.name}
-                      to={item.path}
-                      className={classNames(
-                        location.pathname === item.path
-                          ? 'bg-gray-100 text-red-600'
-                          : 'text-gray-400 hover:bg-gray-100 hover:text-red-600',
-                        'group flex items-center px-2 py-2 text-base font-medium rounded-md',
-                      )}
-                    >
-                      <item.icon
+                  {routesConfig
+                    .filter((item) => item.protected)
+                    .map((item) => (
+                      <Link
+                        key={item.name}
+                        to={item.path}
                         className={classNames(
                           location.pathname === item.path
-                            ? 'text-red-600'
-                            : 'text-gray-400 group-hover:text-red-600',
-                          'mr-4 flex-shrink-0 h-6 w-6',
+                            ? 'bg-gray-100 text-red-600'
+                            : 'text-gray-400 hover:bg-gray-100 hover:text-red-600',
+                          'group flex items-center px-2 py-2 text-base font-medium rounded-md',
                         )}
-                        aria-hidden='true'
-                      />
-                      {item.name}
-                    </Link>
-                  ))}
+                      >
+                        <item.icon
+                          className={classNames(
+                            location.pathname === item.path
+                              ? 'text-red-600'
+                              : 'text-gray-400 group-hover:text-red-600',
+                            'mr-4 flex-shrink-0 h-6 w-6',
+                          )}
+                          aria-hidden='true'
+                        />
+                        {item.name}
+                      </Link>
+                    ))}
                 </nav>
               </div>
             </div>
@@ -101,29 +103,31 @@ const AppSidebar = ({ sidebarOpen, setSidebarOpen }: AppSidebarProps) => {
           </div>
           <div className='flex-1 flex flex-col overflow-y-auto'>
             <nav className='flex-1 px-2 py-4 space-y-6'>
-              {routesConfig.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.path}
-                  className={classNames(
-                    location.pathname === item.path
-                      ? 'bg-gray-100 text-red-600'
-                      : 'text-gray-400 hover:bg-gray-100 hover:text-red-600',
-                    'group flex items-center px-5 py-5 text-sm font-medium rounded-md',
-                  )}
-                >
-                  <item.icon
+              {routesConfig
+                .filter((item) => item.protected)
+                .map((item) => (
+                  <Link
+                    key={item.name}
+                    to={item.path}
                     className={classNames(
                       location.pathname === item.path
-                        ? 'text-red-600'
-                        : 'text-gray-400 group-hover:text-red-600',
-                      'mr-3 flex-shrink-0 h-6 w-6',
+                        ? 'bg-gray-100 text-red-600'
+                        : 'text-gray-400 hover:bg-gray-100 hover:text-red-600',
+                      'group flex items-center px-5 py-5 text-sm font-medium rounded-md',
                     )}
-                    aria-hidden='true'
-                  />
-                  {item.name}
-                </Link>
-              ))}
+                  >
+                    <item.icon
+                      className={classNames(
+                        location.pathname === item.path
+                          ? 'text-red-600'
+                          : 'text-gray-400 group-hover:text-red-600',
+                        'mr-3 flex-shrink-0 h-6 w-6',
+                      )}
+                      aria-hidden='true'
+                    />
+                    {item.name}
+                  </Link>
+                ))}
             </nav>
           </div>
         </div>

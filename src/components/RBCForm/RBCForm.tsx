@@ -19,39 +19,6 @@ export const RBCForm: React.FC<{
         <div className='space-y-6'>
           <div className='bg-white shadow px-4 py-5 sm:rounded-lg sm:p-6'>
             <header className='mb-5 flex-col flex'>
-              <h2 className='text-lg leading-6 font-medium text-gray-900'>Cadastro do Paciente</h2>
-              <span className='mt-1 text-sm text-gray-500'>
-                Aqui você adiciona sua lâmina de paciente.
-              </span>
-            </header>
-
-            <div className='flex flex-wrap gap-6'>
-              <Form.Field>
-                <Form.Label htmlFor='smear_id'>Número da Lâmina</Form.Label>
-                <Form.Input type='text' name='smear_id' />
-                <Form.ErrorMessage field='smear_id' />
-              </Form.Field>
-              <Form.Field>
-                <Form.Label htmlFor='age'>Idade Paciente</Form.Label>
-                <Form.Input type='text' name='age' />
-                <Form.ErrorMessage field='age' />
-              </Form.Field>
-              <Form.Field>
-                <Form.Label htmlFor='gender'>Sexo</Form.Label>
-                <Form.Select name='gender'>
-                  <option value='' disabled selected hidden>
-                    Selecione
-                  </option>
-                  <option value='M'>Masculino</option>
-                  <option value='F'>Feminino</option>
-                </Form.Select>
-                <Form.ErrorMessage field='gender' />
-              </Form.Field>
-            </div>
-          </div>
-
-          <div className='bg-white shadow px-4 py-5 sm:rounded-lg sm:p-6'>
-            <header className='mb-5 flex-col flex'>
               <h2 className='text-lg leading-6 font-medium text-gray-900'>
                 Informações sobre Série Vermelha
               </h2>
