@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContextType, AuthProviderProps, LoginData } from './interfaces';
 import { doLogin } from '@/core/services/doLogin';
 import { setSessionItem } from '@/core/helpers/session';
+import { IRegisterRequest } from '@/core/interfaces/register.interface';
+import { doRegister } from '@/core/services/doRegister';
 
 const AuthContext = createContext({} as AuthContextType);
 
@@ -26,7 +28,19 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     [navigate, setUser],
   );
 
-  // call this function to sign out logged in user
+  const register = useCallback(
+    async (data: IRegisterRequest) => {
+      await doRegister(data)
+        .then(() => {
+          navigate('/');
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    [navigate],
+  );
+
   const logout = useCallback(() => {
     setUser(null);
     navigate('/login', { replace: true });
@@ -37,8 +51,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       user,
       login,
       logout,
+      register,
     }),
-    [login, logout, user],
+    [login, logout, user, register],
   );
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

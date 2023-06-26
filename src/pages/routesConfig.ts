@@ -7,6 +7,7 @@ import { RBC } from './RBC';
 import { UserCircleIcon } from '@heroicons/react/24/solid';
 import { Patients } from './Patient';
 import { Login } from './Login';
+import { Register } from './Register';
 
 interface RouteConfigProps {
   path: string;
@@ -56,6 +57,13 @@ export const routesConfig: RouteConfigProps[] = [
     name: 'Login',
     path: '/login',
     component: Login,
+    icon: CircleStackIcon,
+    protected: false,
+  },
+  {
+    name: 'Register',
+    path: '/register',
+    component: Register,
     icon: CircleStackIcon,
     protected: false,
   },
