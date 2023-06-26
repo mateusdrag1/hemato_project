@@ -3,10 +3,13 @@ import { Button } from '../Button';
 import { Form } from '../Form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { CreateRBCFormData, createRBCFormSchema } from './validate';
+import { useLoadPatients } from '@/core/hooks/useLoadPatients';
 
 export const RBCForm: React.FC<{
   onSubmit: (data: CreateRBCFormData) => void;
 }> = ({ onSubmit }) => {
+  const { dataPatients } = useLoadPatients();
+
   const createRBCForm = useForm<CreateRBCFormData>({
     resolver: zodResolver(createRBCFormSchema),
   });
@@ -28,6 +31,19 @@ export const RBCForm: React.FC<{
             </header>
 
             <div className='flex flex-wrap gap-6'>
+              <Form.Field>
+                <Form.Label htmlFor='blade'>Paciente</Form.Label>
+                <Form.Select name='blade'>
+                  <option value=''>Selecione um paciente</option>
+                  {dataPatients.length > 0 &&
+                    dataPatients.map((patient) => (
+                      <option key={patient.id} value={patient.id}>
+                        {patient.blade}
+                      </option>
+                    ))}
+                </Form.Select>
+                <Form.ErrorMessage field='blade' />
+              </Form.Field>
               <Form.Field>
                 <Form.Label htmlFor='erythrocytes'>Eritrócitos (milhões/µL) </Form.Label>
                 <Form.Input type='text' name='erythrocytes' />

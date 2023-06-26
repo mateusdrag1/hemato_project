@@ -3,53 +3,25 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import { CreateSmearFormData, createSmearFormSchema } from './validate';
 import { Form } from '../Form';
-import { BloodSmear } from '@/pages/WBC';
+
 import { Button } from '../Button';
+import { useLoadPatients } from '@/core/hooks/useLoadPatients';
 
 export const SmearForm: React.FC<{
-  setBloodSmear: React.Dispatch<React.SetStateAction<BloodSmear[]>>;
-  bloodSmear: BloodSmear[];
-}> = ({ setBloodSmear, bloodSmear }) => {
+  onSubmit: (data: CreateSmearFormData) => void;
+}> = ({ onSubmit }) => {
+  const { dataPatients } = useLoadPatients();
+
   const createSmearForm = useForm<CreateSmearFormData>({
     resolver: zodResolver(createSmearFormSchema),
   });
 
   const { handleSubmit, reset } = createSmearForm;
 
-  const createSmear = (data: CreateSmearFormData) => {
-    const smearWithDate = {
-      ...data,
-      createdAt: new Date().toLocaleDateString(),
-    };
-
-    if (bloodSmear.find((smear) => smear.blade === data.blade)) {
-      alert('Já existe uma lâmina com esse número');
-      return;
-    }
-
-    if (
-      data.segmented_neutrophils +
-        data.eosinophils +
-        data.rod +
-        data.lymphocyte +
-        data.monocytes !==
-      100
-    ) {
-      alert('A soma dos valores deve ser igual a 100');
-      return;
-    }
-
-    setBloodSmear((prev) => [...prev, smearWithDate]);
-
-    localStorage.setItem('bloodSmear', JSON.stringify([...bloodSmear, smearWithDate]));
-
-    reset();
-  };
-
   return (
     <FormProvider {...createSmearForm}>
       <div className='space-y-6'>
-        <form onSubmit={handleSubmit(createSmear)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className='bg-white shadow px-4 py-5 sm:rounded-lg sm:p-6'>
             <header className='mb-5 flex-col flex'>
               <h2 className='text-lg leading-6 font-medium text-gray-900'>Contagem diferencial</h2>
@@ -64,24 +36,42 @@ export const SmearForm: React.FC<{
 
             <div className='flex flex-wrap gap-6'>
               <Form.Field>
-                <Form.Label htmlFor='blade'>Número da Lâmina</Form.Label>
-                <Form.Input type='text' name='blade' />
+                <Form.Label htmlFor='blade'>Paciente</Form.Label>
+                <Form.Select name='blade'>
+                  <option value=''>Selecione um paciente</option>
+                  {dataPatients.length > 0 &&
+                    dataPatients.map((patient) => (
+                      <option key={patient.id} value={patient.id}>
+                        {patient.blade}
+                      </option>
+                    ))}
+                </Form.Select>
                 <Form.ErrorMessage field='blade' />
               </Form.Field>
               <Form.Field>
-                <Form.Label htmlFor='segmented_neutrophils'>Neutrófilos Segmentados</Form.Label>
-                <Form.Input type='text' name='segmented_neutrophils' />
-                <Form.ErrorMessage field='segmented_neutrophils' />
+                <Form.Label htmlFor='leukocyte'>Leucócitos Total</Form.Label>
+                <Form.Input type='text' name='leukocyte' />
+                <Form.ErrorMessage field='leukocyte' />
               </Form.Field>
               <Form.Field>
-                <Form.Label htmlFor='eosinophils'>Eosinófilos</Form.Label>
-                <Form.Input type='text' name='eosinophils' />
-                <Form.ErrorMessage field='eosinophils' />
+                <Form.Label htmlFor='neutrophil'>Neutrófilos Segmentados</Form.Label>
+                <Form.Input type='text' name='neutrophil' />
+                <Form.ErrorMessage field='neutrophil' />
               </Form.Field>
               <Form.Field>
-                <Form.Label htmlFor='rod'>Bastonetes</Form.Label>
-                <Form.Input type='text' name='rod' />
-                <Form.ErrorMessage field='rod' />
+                <Form.Label htmlFor='eosinophil'>Eosinófilos</Form.Label>
+                <Form.Input type='text' name='eosinophil' />
+                <Form.ErrorMessage field='eosinophil' />
+              </Form.Field>
+              <Form.Field>
+                <Form.Label htmlFor='basophil'>Basófilos</Form.Label>
+                <Form.Input type='text' name='basophil' />
+                <Form.ErrorMessage field='basophil' />
+              </Form.Field>
+              <Form.Field>
+                <Form.Label htmlFor='bandNeutrophils'>Bastonetes</Form.Label>
+                <Form.Input type='text' name='bandNeutrophils' />
+                <Form.ErrorMessage field='bandNeutrophils' />
               </Form.Field>
               <Form.Field>
                 <Form.Label htmlFor='lymphocyte'>Linfócitos</Form.Label>
@@ -89,9 +79,9 @@ export const SmearForm: React.FC<{
                 <Form.ErrorMessage field='lymphocyte' />
               </Form.Field>
               <Form.Field>
-                <Form.Label htmlFor='monocytes'>Monócitos</Form.Label>
-                <Form.Input type='text' name='monocytes' />
-                <Form.ErrorMessage field='monocytes' />
+                <Form.Label htmlFor='monocyte'>Monócitos</Form.Label>
+                <Form.Input type='text' name='monocyte' />
+                <Form.ErrorMessage field='monocyte' />
               </Form.Field>
             </div>
           </div>

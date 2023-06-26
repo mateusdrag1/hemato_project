@@ -46,6 +46,7 @@ export const WBCSerie = ({
   hematocritIn: number;
 }) => {
   const VCM = Number(((hematocritIn / erythrocytesIn) * 10).toFixed(2));
+
   const HCM = Number(((hemoglobinIn / erythrocytesIn) * 10).toFixed(2));
   const CHCM = Number(((hemoglobinIn / hematocritIn) * 100).toFixed(2));
 

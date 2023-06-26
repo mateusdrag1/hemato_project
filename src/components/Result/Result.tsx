@@ -1,7 +1,7 @@
 import { TrashIcon } from '@heroicons/react/24/outline';
 
 interface ResultProps {
-  removeSmear: (blade: string) => void;
+  removeSmear?: (blade: string) => void;
   blade: string;
   createdAt: string;
   children?: React.ReactNode;
@@ -13,9 +13,11 @@ export const Result: React.FC<ResultProps> = ({ createdAt, removeSmear, blade, c
       <header className='flex justify-between'>
         <h3 className='text-lg leading-6 font-medium text-gray-900'>Lâmina {blade}</h3>
 
-        <button onClick={() => removeSmear(blade)} className='text-red-500'>
-          <TrashIcon className='h-6 w-6' />
-        </button>
+        {removeSmear && (
+          <button onClick={() => removeSmear(blade)} className='text-red-500'>
+            <TrashIcon className='h-6 w-6' />
+          </button>
+        )}
       </header>
       <main className='mt-2 sm:flex sm:justify-between'>{children}</main>
       <footer className='flex justify-end'>

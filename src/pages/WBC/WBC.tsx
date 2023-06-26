@@ -2,46 +2,33 @@ import AppContainer from '@/components/Layout/AppContainer';
 import { ResultWBC } from '@/components/ResultWBC';
 import { SmearForm } from '@/components/SmearForm';
 import { CreateSmearFormData } from '@/components/SmearForm/validate';
+import { useLoadPatients } from '@/core/hooks/useLoadPatients';
 
 export interface BloodSmear extends CreateSmearFormData {
   createdAt: string;
 }
 
-import { FC, useState } from 'react';
+const WBC: React.FC = () => {
+  const { addLeukocytes, dataPatients } = useLoadPatients();
 
-const WBC: FC = () => {
-  const [bloodSmear, setBloodSmear] = useState<BloodSmear[]>(
-    localStorage.getItem('bloodSmear')
-      ? JSON.parse(localStorage.getItem('bloodSmear') as string)
-      : [],
-  );
+  const createSmear = (data: CreateSmearFormData) => {
+    const { bandNeutrophils, basophil, eosinophil, lymphocyte, monocyte, neutrophil } = data;
 
-  const removeSmear = (blade: string) => {
-    const newBloodSmear = bloodSmear.filter((smear) => smear.blade !== blade);
+    if (bandNeutrophils + basophil + eosinophil + lymphocyte + monocyte + neutrophil !== 100) {
+      return;
+    }
 
-    setBloodSmear(newBloodSmear);
-
-    localStorage.setItem('bloodSmear', JSON.stringify(newBloodSmear));
+    addLeukocytes(data.blade, data);
   };
 
   return (
     <AppContainer title='Série Leucocitária'>
-      <SmearForm setBloodSmear={setBloodSmear} bloodSmear={bloodSmear} />
+      <SmearForm onSubmit={createSmear} />
 
       <div className='md:grid md:grid-cols-3 md:gap-6'>
-        {bloodSmear.length > 0 &&
-          bloodSmear.map((bloodSmear) => (
-            <ResultWBC
-              removeSmear={removeSmear}
-              key={`${bloodSmear.createdAt}${bloodSmear.blade}`}
-              bastonetes={bloodSmear.rod}
-              data={bloodSmear.createdAt}
-              eosinofilos={bloodSmear.eosinophils}
-              laminaID={bloodSmear.blade}
-              linfocitos={bloodSmear.lymphocyte}
-              monocitos={bloodSmear.monocytes}
-              segmentados={bloodSmear.segmented_neutrophils}
-            />
+        {dataPatients.length > 0 &&
+          dataPatients.map((pacient) => (
+            <ResultWBC key={`${pacient.createdAt}${pacient.blade}`} pacient={pacient} />
           ))}
       </div>
     </AppContainer>

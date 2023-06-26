@@ -30,6 +30,16 @@ export const reviewNeutrophils = (neutrophils: number) => {
   }
 };
 
+export const reviewLeukocytes = (leukocytes: number) => {
+  if (leukocytes < 4000) {
+    return 'Leucopenia';
+  } else if (leukocytes >= 4000 && leukocytes <= 10000) {
+    return 'Normal';
+  } else {
+    return 'Leucocitose';
+  }
+};
+
 export const reviewEosino = (eosino: number) => {
   const eosinoPercent = eosino / 100;
 

@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
 export const createRBCFormSchema = z.object({
+  blade: z.string().nonempty('O campo Lâmina é obrigatório.'),
   erythrocytes: z.coerce.number().nonnegative('O campo Eritrócitos é obrigatório.'),
   hemoglobin: z.coerce.number().nonnegative('O campo Hemoglobina é obrigatório.'),
   hematocrit: z.coerce.number().nonnegative('O campo Hematócrito é obrigatório.'),

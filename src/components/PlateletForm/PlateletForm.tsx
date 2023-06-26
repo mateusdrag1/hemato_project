@@ -3,10 +3,13 @@ import { Button } from '../Button';
 import { Form } from '../Form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { CreatePlateletFormData, createPlateletFormSchema } from './validate';
+import { useLoadPatients } from '@/core/hooks/useLoadPatients';
 
 export const PlateletForm: React.FC<{
   onSubmit: (data: CreatePlateletFormData) => void;
 }> = ({ onSubmit }) => {
+  const { dataPatients } = useLoadPatients();
+
   const createPlateletForm = useForm<CreatePlateletFormData>({
     resolver: zodResolver(createPlateletFormSchema),
   });
@@ -29,8 +32,16 @@ export const PlateletForm: React.FC<{
 
             <div className='flex flex-wrap gap-6'>
               <Form.Field>
-                <Form.Label htmlFor='blade'>Número da Lâmina</Form.Label>
-                <Form.Input type='text' name='blade' />
+                <Form.Label htmlFor='blade'>Paciente</Form.Label>
+                <Form.Select name='blade'>
+                  <option value=''>Selecione um paciente</option>
+                  {dataPatients.length > 0 &&
+                    dataPatients.map((patient) => (
+                      <option key={patient.id} value={patient.id}>
+                        {patient.blade}
+                      </option>
+                    ))}
+                </Form.Select>
                 <Form.ErrorMessage field='blade' />
               </Form.Field>
               <Form.Field>

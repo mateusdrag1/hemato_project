@@ -1,47 +1,45 @@
-import { Patient } from '@/pages/RBC';
-
+import { IPatient } from '@/core/interfaces/patients.interface';
 import { Result } from '../Result/Result';
 import { WBCSerie, erythrocytes, hematocrit, hemoglobin, rdw } from './RateRBC';
 
 export const ResultRBC: React.FC<{
-  patient: Patient;
-  removeSmear: (id: string) => void;
-}> = ({ patient, removeSmear }) => {
+  patient: IPatient;
+  removeSmear?: (id: string) => void;
+}> = ({ patient }) => {
+  const getLastErythrocyte = () => patient.erythrocyte[patient.erythrocyte.length - 1];
   const { CHCM, CHCMResult, HCM, HCMResult, VCM, VCMResult } = WBCSerie({
-    erythrocytesIn: patient.erythrocytes,
-    hematocritIn: patient.hematocrit,
-    hemoglobinIn: patient.hemoglobin,
+    erythrocytesIn: getLastErythrocyte()?.erythrocyte,
+    hematocritIn: getLastErythrocyte()?.hematocrit,
+    hemoglobinIn: getLastErythrocyte()?.hemoglobin,
   });
 
+  if (!getLastErythrocyte()) return <></>;
+
   return (
-    <Result
-      removeSmear={() => removeSmear(patient.blade)}
-      blade={patient.blade}
-      createdAt={patient.createdAt}
-    >
+    <Result blade={patient.blade} createdAt={patient.createdAt}>
       <div className='mt-2 flex flex-col items-start text-sm text-gray-500 sm:mt-0'>
         <div className='my-2'>
           Eritrocitos:{' '}
           <span className='ml-1 font-medium text-gray-900'>
-            {patient.erythrocytes} - {erythrocytes(patient.erythrocytes)}
+            {getLastErythrocyte().erythrocyte} - {erythrocytes(getLastErythrocyte().erythrocyte)}
           </span>
         </div>
         <div className='my-2'>
           Hemoglobina:{' '}
           <span className='ml-1 font-medium text-gray-900'>
-            {patient.hemoglobin} - {hemoglobin(patient.hemoglobin)}
+            {getLastErythrocyte().hemoglobin} - {hemoglobin(getLastErythrocyte().hemoglobin)}
           </span>
         </div>
         <div className='my-2'>
           Hematócrito:{' '}
           <span className='ml-1 font-medium text-gray-900'>
-            {patient.hematocrit} - {hematocrit(patient.hematocrit)}
+            {getLastErythrocyte().hematocrit} - {hematocrit(getLastErythrocyte().hematocrit)}
           </span>
         </div>
         <div className='my-2'>
           RDW:{' '}
           <span className='ml-1 font-medium text-gray-900'>
-            {patient.rdw} - {rdw(patient.rdw)}
+            {getLastErythrocyte().RDW} - {rdw(getLastErythrocyte().RDW)}
           </span>
         </div>
 

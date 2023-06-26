@@ -3,15 +3,13 @@ import AppContainer from '@/components/Layout/AppContainer';
 import { api } from '@/configs';
 import {
   UserIcon,
-  ClipboardDocumentCheckIcon,
-  DocumentDuplicateIcon,
+  // ClipboardDocumentCheckIcon,
+  // DocumentDuplicateIcon,
 } from '@heroicons/react/24/outline';
 import { useEffect, useState } from 'react';
 
 export const Dashboard: React.FC = () => {
   const [patients, setPatients] = useState<any[]>([]);
-  const [bloodSmear, setBloodSmear] = useState<any[]>([]);
-  const [exams, setExams] = useState<any[]>([]);
 
   useEffect(() => {
     document.title = 'Hematopedia | Dashboard';
@@ -36,8 +34,8 @@ export const Dashboard: React.FC = () => {
       </div>
       <header className='md:grid md:grid-cols-3 gap-6 space-y-5 md:space-y-0'>
         <Card Icon={UserIcon} qtd={patients.length} title='Pacientes' color='blue' />
-        <Card Icon={DocumentDuplicateIcon} qtd={bloodSmear.length} title='Lâminas' color='red' />
-        <Card Icon={ClipboardDocumentCheckIcon} qtd={exams.length} title='Exames' color='green' />
+        {/* <Card Icon={DocumentDuplicateIcon} qtd={bloodSmear.length} title='Lâminas' color='red' />
+        <Card Icon={ClipboardDocumentCheckIcon} qtd={exams.length} title='Exames' color='green' /> */}
       </header>
     </AppContainer>
   );

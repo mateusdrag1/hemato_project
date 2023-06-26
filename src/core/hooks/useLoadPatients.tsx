@@ -3,6 +3,9 @@ import { IUseLoadPatients } from '../interfaces/load-patients.interface';
 import { IPatient } from '../interfaces/patients.interface';
 import { api } from '@/configs';
 import { CreatePatientFormData } from '@/components/PatientForm/validate';
+import { CreateRBCFormData } from '@/components/RBCForm/validate';
+import { CreateSmearFormData } from '@/components/SmearForm/validate';
+import { CreatePlateletFormData } from '@/components/PlateletForm/validate';
 
 const useLoadPatients = (): IUseLoadPatients => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -36,6 +39,62 @@ const useLoadPatients = (): IUseLoadPatients => {
     }
   }, []);
 
+  const addErythrocyte = useCallback(
+    async (id: string, data: CreateRBCFormData) => {
+      setIsLoading(true);
+
+      console.log(data);
+
+      try {
+        await api.post(`/pacients/${id}/erythrocytes`, {
+          ...data,
+          erythrocyte: data.erythrocytes,
+        });
+
+        loadPatients();
+      } catch (error) {
+        setError(true);
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [loadPatients],
+  );
+
+  const addLeukocytes = useCallback(
+    async (id: string, data: CreateSmearFormData) => {
+      setIsLoading(true);
+
+      try {
+        await api.post(`/pacients/${id}/leukocytes`, data);
+
+        loadPatients();
+      } catch (error) {
+        setError(true);
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [loadPatients],
+  );
+
+  const addPlatelets = useCallback(
+    async (id: string, data: CreatePlateletFormData) => {
+      setIsLoading(true);
+
+      try {
+        await api.post(`/pacients/${id}/platelets`, data);
+
+        loadPatients();
+      } catch (error) {
+        setError(true);
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [loadPatients],
+  );
+
   const removePatient = useCallback(async (id: number) => {
     setIsLoading(true);
 
@@ -61,6 +120,9 @@ const useLoadPatients = (): IUseLoadPatients => {
     loadPatients,
     createPatient,
     removePatient,
+    addErythrocyte,
+    addLeukocytes,
+    addPlatelets,
   };
 };
 
