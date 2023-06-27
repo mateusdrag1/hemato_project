@@ -3,9 +3,6 @@ import { IUseLoadPatients } from '../interfaces/load-patients.interface';
 import { IPatient } from '../interfaces/patients.interface';
 import { api } from '@/configs';
 import { CreatePatientFormData } from '@/components/PatientForm/validate';
-import { CreateRBCFormData } from '@/components/RBCForm/validate';
-import { CreateSmearFormData } from '@/components/SmearForm/validate';
-import { CreatePlateletFormData } from '@/components/PlateletForm/validate';
 
 const useLoadPatients = (): IUseLoadPatients => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -39,18 +36,12 @@ const useLoadPatients = (): IUseLoadPatients => {
     }
   }, []);
 
-  const addErythrocyte = useCallback(
-    async (id: string, data: CreateRBCFormData) => {
+  const addDataEntry = useCallback(
+    async (id: string, endpoint: string, data: any) => {
       setIsLoading(true);
 
-      console.log(data);
-
       try {
-        await api.post(`/pacients/${id}/erythrocytes`, {
-          ...data,
-          erythrocyte: data.erythrocytes,
-        });
-
+        await api.post(`/pacients/${id}/${endpoint}`, data);
         loadPatients();
       } catch (error) {
         setError(true);
@@ -61,41 +52,7 @@ const useLoadPatients = (): IUseLoadPatients => {
     [loadPatients],
   );
 
-  const addLeukocytes = useCallback(
-    async (id: string, data: CreateSmearFormData) => {
-      setIsLoading(true);
-
-      try {
-        await api.post(`/pacients/${id}/leukocytes`, data);
-
-        loadPatients();
-      } catch (error) {
-        setError(true);
-      } finally {
-        setIsLoading(false);
-      }
-    },
-    [loadPatients],
-  );
-
-  const addPlatelets = useCallback(
-    async (id: string, data: CreatePlateletFormData) => {
-      setIsLoading(true);
-
-      try {
-        await api.post(`/pacients/${id}/platelets`, data);
-
-        loadPatients();
-      } catch (error) {
-        setError(true);
-      } finally {
-        setIsLoading(false);
-      }
-    },
-    [loadPatients],
-  );
-
-  const removePatient = useCallback(async (id: number) => {
+  const removePatient = useCallback(async (id: number): Promise<void> => {
     setIsLoading(true);
 
     try {
@@ -120,9 +77,10 @@ const useLoadPatients = (): IUseLoadPatients => {
     loadPatients,
     createPatient,
     removePatient,
-    addErythrocyte,
-    addLeukocytes,
-    addPlatelets,
+    addErythrocyte: (id, data) =>
+      addDataEntry(id, 'erythrocytes', { ...data, erythrocyte: data.erythrocytes }),
+    addLeukocytes: (id, data) => addDataEntry(id, 'leukocytes', data),
+    addPlatelets: (id, data) => addDataEntry(id, 'platelets', data),
   };
 };
 
