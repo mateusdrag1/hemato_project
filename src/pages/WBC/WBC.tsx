@@ -1,7 +1,8 @@
 import AppContainer from '@/components/Layout/AppContainer';
-import { ResultWBC } from '@/components/ResultWBC';
+
 import { SmearForm } from '@/components/SmearForm';
 import { CreateSmearFormData } from '@/components/SmearForm/validate';
+import { WBCCard } from '@/components/WBCCard/WBCCard';
 
 import { useAddLeukocyteMutation, useGetPatientsQuery } from '@/features/patients/patientSlice';
 import { enqueueSnackbar } from 'notistack';
@@ -12,7 +13,7 @@ export interface BloodSmear extends CreateSmearFormData {
 }
 
 const WBC: React.FC = () => {
-  const { data } = useGetPatientsQuery();
+  const { data, isFetching } = useGetPatientsQuery();
   const [addLeukocyte, addLeukocyteStatus] = useAddLeukocyteMutation();
 
   const handleSubmit = async (data: CreateSmearFormData) => {
@@ -44,10 +45,7 @@ const WBC: React.FC = () => {
       <SmearForm onSubmit={handleSubmit} patients={data?.patients || []} />
 
       <div className='md:grid md:grid-cols-3 md:gap-6'>
-        {data?.patients.length > 0 &&
-          data?.patients.map((pacient) => (
-            <ResultWBC key={`${pacient.createdAt}${pacient.blade}`} pacient={pacient} />
-          ))}
+        <WBCCard data={data?.patients} isFetching={isFetching} />
       </div>
     </AppContainer>
   );

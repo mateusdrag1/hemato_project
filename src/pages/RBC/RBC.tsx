@@ -1,16 +1,15 @@
 import AppContainer from '@/components/Layout/AppContainer';
+import { RBCCard } from '@/components/RBCCard';
 
 import { RBCForm } from '@/components/RBCForm';
 import { CreateRBCFormData } from '@/components/RBCForm/validate';
-
-import { ResultRBC } from '@/components/ResultRBC';
 
 import { useGetPatientsQuery, useAddErythrocyteMutation } from '@/features/patients/patientSlice';
 import { enqueueSnackbar } from 'notistack';
 import { useEffect } from 'react';
 
 export const RBC = () => {
-  const { data } = useGetPatientsQuery();
+  const { data, isFetching } = useGetPatientsQuery();
   const [addErythrocyte, addErythrocyteStatus] = useAddErythrocyteMutation();
 
   const handleSubmit = async (data: CreateRBCFormData) => {
@@ -36,8 +35,7 @@ export const RBC = () => {
       <RBCForm onSubmit={handleSubmit} patients={data?.patients || []} />
 
       <div className='md:grid md:grid-cols-3 md:gap-6'>
-        {data?.patients?.length > 0 &&
-          data?.patients.map((patient) => <ResultRBC key={patient.blade} patient={patient} />)}
+        <RBCCard data={data?.patients} isFetching={isFetching} />
       </div>
     </AppContainer>
   );

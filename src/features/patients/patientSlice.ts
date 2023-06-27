@@ -1,4 +1,4 @@
-import { IPatient, IPatientErythrocyte } from '@/core/interfaces/patients.interface';
+import { IPatient } from '@/core/interfaces/patients.interface';
 import { RootState } from '@/core/store';
 import { createSlice } from '@reduxjs/toolkit';
 import { apiSlice } from '../api/apiSlice';
