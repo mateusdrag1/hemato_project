@@ -1,20 +1,59 @@
 import AppContainer from '@/components/Layout/AppContainer';
+import { PatientCard } from '@/components/PatientCard';
 import { PatientForm } from '@/components/PatientForm';
 import { CreatePatientFormData } from '@/components/PatientForm/validate';
-import { Result } from '@/components/Result';
 
-import { useLoadPatients } from '@/core/hooks/useLoadPatients';
+import {
+  useCreatePatientMutation,
+  useDeletePatientMutation,
+  useGetPatientsQuery,
+} from '@/features/patients/patientSlice';
+import { useSnackbar } from 'notistack';
+import { useEffect } from 'react';
 
 export const Patients: React.FC = () => {
-  const { dataPatients, createPatient, removePatient } = useLoadPatients();
+  const { enqueueSnackbar } = useSnackbar();
+  const { data, isFetching } = useGetPatientsQuery();
+  const [deletePatient, deletePatientStatus] = useDeletePatientMutation();
+  const [createPatient, createPatientStatus] = useCreatePatientMutation();
 
   const handleSubmit = async (data: CreatePatientFormData) => {
-    createPatient(data);
+    await createPatient(data);
   };
 
-  const removeSmear = (id: number) => {
-    removePatient(id);
+  const removeSmear = async (id: number) => {
+    await deletePatient({
+      id,
+    });
   };
+
+  useEffect(() => {
+    if (deletePatientStatus.isSuccess) {
+      enqueueSnackbar('Paciente removido com sucesso', {
+        variant: 'success',
+      });
+    }
+
+    if (deletePatientStatus.error) {
+      enqueueSnackbar('Erro ao remover paciente', {
+        variant: 'error',
+      });
+    }
+  }, [deletePatientStatus, enqueueSnackbar]);
+
+  useEffect(() => {
+    if (createPatientStatus.isSuccess) {
+      enqueueSnackbar('Paciente criado com sucesso', {
+        variant: 'success',
+      });
+    }
+
+    if (createPatientStatus.error) {
+      enqueueSnackbar('Erro ao criar paciente', {
+        variant: 'error',
+      });
+    }
+  }, [createPatientStatus, enqueueSnackbar]);
 
   return (
     <AppContainer
@@ -23,27 +62,7 @@ export const Patients: React.FC = () => {
     >
       <PatientForm onSubmit={handleSubmit} />
       <div className='md:grid md:grid-cols-3 md:gap-6'>
-        {dataPatients.length > 0 &&
-          dataPatients.map((patient) => (
-            <Result
-              key={`${patient.blade}-${patient.created_at}`}
-              removeSmear={() => removeSmear(patient.id)}
-              blade={patient.blade}
-              createdAt={patient.created_at}
-            >
-              <div className='mt-2 flex flex-col items-start text-sm text-gray-500 sm:mt-0'>
-                <div className='my-2'>
-                  Idade: <span className='ml-1 font-medium text-gray-900'>{patient.age}</span>
-                </div>
-                <div className='my-2'>
-                  Sexo:{' '}
-                  <span className='ml-1 font-medium text-gray-900'>
-                    {patient.genre === 'M' ? 'Masculino' : 'Feminino'}
-                  </span>
-                </div>
-              </div>
-            </Result>
-          ))}
+        <PatientCard data={data?.patients} isFetching={isFetching} handleRemove={removeSmear} />
       </div>
     </AppContainer>
   );

@@ -78,7 +78,7 @@ const useLoadPatients = (): IUseLoadPatients => {
     createPatient,
     removePatient,
     addErythrocyte: (id, data) =>
-      addDataEntry(id, 'erythrocytes', { ...data, erythrocyte: data.erythrocytes }),
+      addDataEntry(id, 'erythrocytes', { ...data, erythrocyte: data.erythrocyte }),
     addLeukocytes: (id, data) => addDataEntry(id, 'leukocytes', data),
     addPlatelets: (id, data) => addDataEntry(id, 'platelets', data),
   };

@@ -1,13 +1,11 @@
 import { Result } from '../Result/Result';
 import { IPatient } from '@/core/interfaces/patients.interface';
 
-export const ResultPlatelet: React.FC<{
-  pacient: IPatient;
-}> = ({ pacient }) => {
+export const ResultPlatelet: React.FC<{ pacient: IPatient }> = ({ pacient }) => {
   const lastPlatelets = pacient.platelets[pacient.platelets.length - 1];
 
   if (!lastPlatelets) {
-    return <></>;
+    return null;
   }
 
   const plateletsResult = () => {

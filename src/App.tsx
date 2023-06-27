@@ -1,18 +1,21 @@
+import { SnackbarProvider } from 'notistack';
 import { AuthProvider } from './core/contexts/AuthContext';
 import AppRoutes from './routes';
-import { ToastContainer } from 'react-toastify';
 
 import { BrowserRouter } from 'react-router-dom';
 
-import 'react-toastify/dist/ReactToastify.css';
-
 export default function App() {
   return (
-    <BrowserRouter>
-      <AuthProvider>
-        <AppRoutes />
-        <ToastContainer />
-      </AuthProvider>
-    </BrowserRouter>
+    <SnackbarProvider
+      maxSnack={3}
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      autoHideDuration={2000}
+    >
+      <BrowserRouter>
+        <AuthProvider>
+          <AppRoutes />
+        </AuthProvider>
+      </BrowserRouter>
+    </SnackbarProvider>
   );
 }

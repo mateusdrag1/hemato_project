@@ -1,23 +1,43 @@
 import AppContainer from '@/components/Layout/AppContainer';
+
 import { RBCForm } from '@/components/RBCForm';
 import { CreateRBCFormData } from '@/components/RBCForm/validate';
+
 import { ResultRBC } from '@/components/ResultRBC';
-import { useLoadPatients } from '@/core/hooks/useLoadPatients';
+
+import { useGetPatientsQuery, useAddErythrocyteMutation } from '@/features/patients/patientSlice';
+import { enqueueSnackbar } from 'notistack';
+import { useEffect } from 'react';
 
 export const RBC = () => {
-  const { dataPatients, addErythrocyte } = useLoadPatients();
+  const { data } = useGetPatientsQuery();
+  const [addErythrocyte, addErythrocyteStatus] = useAddErythrocyteMutation();
 
-  const handleSubmit = (data: CreateRBCFormData) => {
-    addErythrocyte(data.blade, data);
+  const handleSubmit = async (data: CreateRBCFormData) => {
+    await addErythrocyte(data);
   };
+
+  useEffect(() => {
+    if (addErythrocyteStatus.isSuccess) {
+      enqueueSnackbar('Série Plaquetária adicionada com sucesso', {
+        variant: 'success',
+      });
+    }
+
+    if (addErythrocyteStatus.error) {
+      enqueueSnackbar('Erro ao adicionar Série Plaquetária', {
+        variant: 'error',
+      });
+    }
+  }, [addErythrocyteStatus]);
 
   return (
     <AppContainer title='Série Eritrocitária'>
-      <RBCForm onSubmit={handleSubmit} />
+      <RBCForm onSubmit={handleSubmit} patients={data?.patients || []} />
 
       <div className='md:grid md:grid-cols-3 md:gap-6'>
-        {dataPatients.length > 0 &&
-          dataPatients.map((patient) => <ResultRBC key={patient.blade} patient={patient} />)}
+        {data?.patients?.length > 0 &&
+          data?.patients.map((patient) => <ResultRBC key={patient.blade} patient={patient} />)}
       </div>
     </AppContainer>
   );

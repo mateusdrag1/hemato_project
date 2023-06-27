@@ -1,26 +1,19 @@
 import { Card } from '@/components/Card';
 import AppContainer from '@/components/Layout/AppContainer';
-import { api } from '@/configs';
+
+import { useGetPatientsQuery } from '@/features/patients/patientSlice';
+
 import {
+  ClipboardDocumentCheckIcon,
+  DocumentDuplicateIcon,
   UserIcon,
-  // ClipboardDocumentCheckIcon,
-  // DocumentDuplicateIcon,
 } from '@heroicons/react/24/outline';
-import { useEffect, useState } from 'react';
 
 export const Dashboard: React.FC = () => {
-  const [patients, setPatients] = useState<any[]>([]);
+  const { data } = useGetPatientsQuery();
 
-  useEffect(() => {
-    document.title = 'Hematopedia | Dashboard';
-
-    const getPatients = async () => {
-      const response = await api.get('/pacients');
-      setPatients(response.data.patients);
-    };
-
-    getPatients();
-  }, []);
+  const patientsWithSmear = data?.patients.filter((patient) => patient.leukocyte.length > 0) || [];
+  const patientsWithRBC = data?.patients.filter((patient) => patient.erythrocyte.length > 0) || [];
 
   return (
     <AppContainer title='Dashboard'>
@@ -33,9 +26,19 @@ export const Dashboard: React.FC = () => {
         </span>
       </div>
       <header className='md:grid md:grid-cols-3 gap-6 space-y-5 md:space-y-0'>
-        <Card Icon={UserIcon} qtd={patients.length} title='Pacientes' color='blue' />
-        {/* <Card Icon={DocumentDuplicateIcon} qtd={bloodSmear.length} title='Lâminas' color='red' />
-        <Card Icon={ClipboardDocumentCheckIcon} qtd={exams.length} title='Exames' color='green' /> */}
+        <Card Icon={UserIcon} qtd={data?.patients.length ?? 0} title='Pacientes' color='blue' />
+        <Card
+          Icon={DocumentDuplicateIcon}
+          qtd={patientsWithRBC.length}
+          title='Séries Eritrocitárias'
+          color='red'
+        />
+        <Card
+          Icon={ClipboardDocumentCheckIcon}
+          qtd={patientsWithSmear.length}
+          title='Séries Leucocitárias'
+          color='green'
+        />
       </header>
     </AppContainer>
   );

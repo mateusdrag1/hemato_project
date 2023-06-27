@@ -1,4 +1,5 @@
 import { TrashIcon } from '@heroicons/react/24/outline';
+import { format } from 'date-fns';
 
 interface ResultProps {
   removeSmear?: (blade: string) => void;
@@ -22,7 +23,7 @@ export const Result: React.FC<ResultProps> = ({ createdAt, removeSmear, blade, c
       <main className='mt-2 sm:flex sm:justify-between'>{children}</main>
       <footer className='flex justify-end'>
         <span className='inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800'>
-          {createdAt}
+          {format(new Date(createdAt), 'dd/MM/yyyy HH:mm')}
         </span>
       </footer>
     </div>

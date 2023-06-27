@@ -5,13 +5,13 @@ import { CreateSmearFormData, createSmearFormSchema } from './validate';
 import { Form } from '../Form';
 
 import { Button } from '../Button';
-import { useLoadPatients } from '@/core/hooks/useLoadPatients';
+
+import { IPatient } from '@/core/interfaces/patients.interface';
 
 export const SmearForm: React.FC<{
+  patients: IPatient[];
   onSubmit: (data: CreateSmearFormData) => void;
-}> = ({ onSubmit }) => {
-  const { dataPatients } = useLoadPatients();
-
+}> = ({ patients, onSubmit }) => {
   const createSmearForm = useForm<CreateSmearFormData>({
     resolver: zodResolver(createSmearFormSchema),
   });
@@ -39,8 +39,8 @@ export const SmearForm: React.FC<{
                 <Form.Label htmlFor='blade'>Paciente</Form.Label>
                 <Form.Select name='blade'>
                   <option value=''>Selecione um paciente</option>
-                  {dataPatients.length > 0 &&
-                    dataPatients.map((patient) => (
+                  {patients.length > 0 &&
+                    patients.map((patient) => (
                       <option key={patient.id} value={patient.id}>
                         {patient.blade}
                       </option>

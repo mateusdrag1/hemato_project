@@ -3,13 +3,13 @@ import { Button } from '../Button';
 import { Form } from '../Form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { CreateRBCFormData, createRBCFormSchema } from './validate';
-import { useLoadPatients } from '@/core/hooks/useLoadPatients';
+
+import { IPatient } from '@/core/interfaces/patients.interface';
 
 export const RBCForm: React.FC<{
+  patients: IPatient[];
   onSubmit: (data: CreateRBCFormData) => void;
-}> = ({ onSubmit }) => {
-  const { dataPatients } = useLoadPatients();
-
+}> = ({ patients, onSubmit }) => {
   const createRBCForm = useForm<CreateRBCFormData>({
     resolver: zodResolver(createRBCFormSchema),
   });
@@ -35,8 +35,8 @@ export const RBCForm: React.FC<{
                 <Form.Label htmlFor='blade'>Paciente</Form.Label>
                 <Form.Select name='blade'>
                   <option value=''>Selecione um paciente</option>
-                  {dataPatients.length > 0 &&
-                    dataPatients.map((patient) => (
+                  {patients.length > 0 &&
+                    patients.map((patient) => (
                       <option key={patient.id} value={patient.id}>
                         {patient.blade}
                       </option>
@@ -45,9 +45,9 @@ export const RBCForm: React.FC<{
                 <Form.ErrorMessage field='blade' />
               </Form.Field>
               <Form.Field>
-                <Form.Label htmlFor='erythrocytes'>Eritrócitos (milhões/µL) </Form.Label>
-                <Form.Input type='text' name='erythrocytes' />
-                <Form.ErrorMessage field='erythrocytes' />
+                <Form.Label htmlFor='erythrocyte'>Eritrócitos (milhões/µL) </Form.Label>
+                <Form.Input type='text' name='erythrocyte' />
+                <Form.ErrorMessage field='erythrocyte' />
               </Form.Field>
               <Form.Field>
                 <Form.Label htmlFor='hemoglobin'>Hemoglobina</Form.Label>
