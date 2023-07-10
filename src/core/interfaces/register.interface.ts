@@ -13,6 +13,6 @@ export interface IUser {
   email: string;
   password: string;
   name: string;
-  createdAt: string; // ISO 8601
-  updatedAt: string; // ISO 8601
+  created_at: string; // ISO 8601
+  updated_at: string; // ISO 8601
 }

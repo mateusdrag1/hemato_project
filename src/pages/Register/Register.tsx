@@ -15,6 +15,7 @@ export const Register = () => {
 
   const onSubmit = async (data: RegisterFormData) => {
     register(data);
+
     reset();
   };
 

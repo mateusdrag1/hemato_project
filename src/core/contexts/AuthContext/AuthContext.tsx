@@ -6,6 +6,7 @@ import { doLogin } from '@/core/services/doLogin';
 import { setSessionItem } from '@/core/helpers/session';
 import { IRegisterRequest } from '@/core/interfaces/register.interface';
 import { doRegister } from '@/core/services/doRegister';
+import { enqueueSnackbar } from 'notistack';
 
 const AuthContext = createContext({} as AuthContextType);
 
@@ -19,22 +20,26 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         .then((response) => {
           setSessionItem('@HP-Token', response.data.token);
           setUser(response.data);
-          navigate('/');
+          enqueueSnackbar('Login realizado com sucesso', { variant: 'success' });
         })
         .catch((error) => {
+          enqueueSnackbar('Usuário ou senha incorretos', { variant: 'error' });
+
           console.log(error);
         });
     },
-    [navigate, setUser],
+    [setUser],
   );
 
   const register = useCallback(
     async (data: IRegisterRequest) => {
       await doRegister(data)
         .then(() => {
+          enqueueSnackbar('Usuário cadastrado com sucesso', { variant: 'success' });
           navigate('/');
         })
         .catch((error) => {
+          enqueueSnackbar('Erro ao cadastrar usuário', { variant: 'error' });
           console.log(error);
         });
     },
