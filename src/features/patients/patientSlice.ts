@@ -11,8 +11,6 @@ export const patient: IPatient = {
   blade: '0000000000001',
   age: 1,
   genre: 'M',
-  createdAt: '2023-06-26T17:24:41.309Z',
-  updatedAt: '2023-06-26T17:24:41.309Z',
   erythrocyte: [],
   leukocyte: [],
   platelets: [],
@@ -20,7 +18,7 @@ export const patient: IPatient = {
   updated_at: '2023-06-26T17:24:41.309Z',
 };
 
-const endpoint = '/pacients';
+const endpoint = '/patients';
 
 export const patientsApiSlice = apiSlice.injectEndpoints({
   endpoints: ({ query, mutation }) => ({

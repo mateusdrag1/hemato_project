@@ -54,19 +54,19 @@ export const SmearForm: React.FC<{
                 <Form.ErrorMessage field='leukocyte' />
               </Form.Field>
               <Form.Field>
-                <Form.Label htmlFor='neutrophil'>Neutrófilos Segmentados</Form.Label>
-                <Form.Input type='text' name='neutrophil' />
-                <Form.ErrorMessage field='neutrophil' />
+                <Form.Label htmlFor='neutrophils'>Neutrófilos Segmentados</Form.Label>
+                <Form.Input type='text' name='neutrophils' />
+                <Form.ErrorMessage field='neutrophils' />
               </Form.Field>
               <Form.Field>
-                <Form.Label htmlFor='eosinophil'>Eosinófilos</Form.Label>
-                <Form.Input type='text' name='eosinophil' />
-                <Form.ErrorMessage field='eosinophil' />
+                <Form.Label htmlFor='eosinophils'>Eosinófilos</Form.Label>
+                <Form.Input type='text' name='eosinophils' />
+                <Form.ErrorMessage field='eosinophils' />
               </Form.Field>
               <Form.Field>
-                <Form.Label htmlFor='basophil'>Basófilos</Form.Label>
-                <Form.Input type='text' name='basophil' />
-                <Form.ErrorMessage field='basophil' />
+                <Form.Label htmlFor='basophils'>Basófilos</Form.Label>
+                <Form.Input type='text' name='basophils' />
+                <Form.ErrorMessage field='basophils' />
               </Form.Field>
               <Form.Field>
                 <Form.Label htmlFor='bandNeutrophils'>Bastonetes</Form.Label>
@@ -74,14 +74,14 @@ export const SmearForm: React.FC<{
                 <Form.ErrorMessage field='bandNeutrophils' />
               </Form.Field>
               <Form.Field>
-                <Form.Label htmlFor='lymphocyte'>Linfócitos</Form.Label>
-                <Form.Input type='text' name='lymphocyte' />
-                <Form.ErrorMessage field='lymphocyte' />
+                <Form.Label htmlFor='lymphocytes'>Linfócitos</Form.Label>
+                <Form.Input type='text' name='lymphocytes' />
+                <Form.ErrorMessage field='lymphocytes' />
               </Form.Field>
               <Form.Field>
-                <Form.Label htmlFor='monocyte'>Monócitos</Form.Label>
-                <Form.Input type='text' name='monocyte' />
-                <Form.ErrorMessage field='monocyte' />
+                <Form.Label htmlFor='monocytes'>Monócitos</Form.Label>
+                <Form.Input type='text' name='monocytes' />
+                <Form.ErrorMessage field='monocytes' />
               </Form.Field>
             </div>
           </div>

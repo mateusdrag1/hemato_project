@@ -6,10 +6,8 @@ export interface IPatient {
   erythrocyte: IPatientErythrocyte[];
   leukocyte: IPatientLeukocyte[];
   platelets: IPatientPlatelet[];
-  createdAt: string;
   created_at: string;
   updated_at: string;
-  updatedAt: string;
 }
 
 export interface IPatientErythrocyte {

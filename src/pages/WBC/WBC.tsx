@@ -17,9 +17,12 @@ const WBC: React.FC = () => {
   const [addLeukocyte, addLeukocyteStatus] = useAddLeukocyteMutation();
 
   const handleSubmit = async (data: CreateSmearFormData) => {
-    const { bandNeutrophils, basophil, eosinophil, lymphocyte, monocyte, neutrophil } = data;
+    const { bandNeutrophils, basophils, eosinophils, lymphocytes, monocytes, neutrophils } = data;
 
-    if (bandNeutrophils + basophil + eosinophil + lymphocyte + monocyte + neutrophil !== 100) {
+    if (bandNeutrophils + basophils + eosinophils + lymphocytes + monocytes + neutrophils !== 100) {
+      enqueueSnackbar('A soma da contagem diferencial deve ser igual a 100', {
+        variant: 'error',
+      });
       return;
     }
 
@@ -28,13 +31,13 @@ const WBC: React.FC = () => {
 
   useEffect(() => {
     if (addLeukocyteStatus.isSuccess) {
-      enqueueSnackbar('Série Plaquetária adicionada com sucesso', {
+      enqueueSnackbar('Série Leucocitária adicionada com sucesso', {
         variant: 'success',
       });
     }
 
     if (addLeukocyteStatus.error) {
-      enqueueSnackbar('Erro ao adicionar Série Plaquetária', {
+      enqueueSnackbar('Erro ao adicionar Série Leucocitária', {
         variant: 'error',
       });
     }

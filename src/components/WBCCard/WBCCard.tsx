@@ -32,7 +32,7 @@ export const WBCCard: React.FC<WBCCardProps> = ({ data, isFetching, hasError }) 
         if (!lastResult) return <></>;
 
         return (
-          <Result key={patient.blade} createdAt={patient.createdAt} blade={patient.blade}>
+          <Result key={patient.blade} createdAt={patient.created_at} blade={patient.blade}>
             <div className='mt-2 flex flex-col items-start text-sm text-gray-500 sm:mt-0'>
               <div className='my-2'>
                 Leucócitos:{' '}

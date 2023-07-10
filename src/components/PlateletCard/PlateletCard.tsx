@@ -25,7 +25,7 @@ export const PlateletCard: React.FC<PlateletCardProps> = ({ data, isFetching, ha
         if (!lastResult) return <></>;
 
         return (
-          <Result createdAt={patient.createdAt} blade={patient.blade} key={patient.blade}>
+          <Result createdAt={patient.created_at} blade={patient.blade} key={patient.blade}>
             <div className='mt-2 flex flex-col items-start text-sm text-gray-500 sm:mt-0'>
               <div className='my-2'>
                 Plaquetas:{' '}

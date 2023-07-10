@@ -3,11 +3,11 @@ import { z } from 'zod';
 export const createSmearFormSchema = z.object({
   blade: z.string().nonempty('O campo ID da lâmina é obrigatório.'),
   leukocyte: z.coerce.number().nonnegative('O campo Leucócitos é obrigatório.'),
-  neutrophil: z.coerce
+  neutrophils: z.coerce
     .number()
     .nonnegative('O campo Segmentados é obrigatório.')
     .max(100, 'O campo Segmentados deve ser menor que 100.'),
-  eosinophil: z.coerce
+  eosinophils: z.coerce
     .number()
     .nonnegative('O campo Eosinófilos é obrigatório.')
     .max(100, 'O campo Eosinófilos deve ser menor que 100.'),
@@ -15,15 +15,15 @@ export const createSmearFormSchema = z.object({
     .number()
     .nonnegative('O campo Bastonetes é obrigatório.')
     .max(100, 'O campo Bastonetes deve ser menor que 100.'),
-  lymphocyte: z.coerce
+  lymphocytes: z.coerce
     .number()
     .nonnegative('O campo Linfócitos é obrigatório.')
     .max(100, 'O campo Linfócitos deve ser menor que 100.'),
-  monocyte: z.coerce
+  monocytes: z.coerce
     .number()
     .nonnegative('O campo Monócitos é obrigatório.')
     .max(100, 'O campo Monócitos deve ser menor que 100.'),
-  basophil: z.coerce
+  basophils: z.coerce
     .number()
     .nonnegative('O campo Basófilos é obrigatório.')
     .max(100, 'O campo Basófilos deve ser menor que 100.'),

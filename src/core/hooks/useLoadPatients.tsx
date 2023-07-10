@@ -13,7 +13,8 @@ const useLoadPatients = (): IUseLoadPatients => {
     setIsLoading(true);
 
     try {
-      const response = await api.get('/pacients');
+      const response = await api.get('/patients');
+
       setDataPatients(response.data.patients);
     } catch (error) {
       setError(true);
@@ -26,7 +27,7 @@ const useLoadPatients = (): IUseLoadPatients => {
     setIsLoading(true);
 
     try {
-      const response = await api.post('/pacients', data);
+      const response = await api.post('/patients', data);
 
       setDataPatients((prevState) => [...prevState, response.data.patient]);
     } catch (error) {
@@ -41,7 +42,7 @@ const useLoadPatients = (): IUseLoadPatients => {
       setIsLoading(true);
 
       try {
-        await api.post(`/pacients/${id}/${endpoint}`, data);
+        await api.post(`/patients/${id}/${endpoint}`, data);
         loadPatients();
       } catch (error) {
         setError(true);
@@ -56,7 +57,7 @@ const useLoadPatients = (): IUseLoadPatients => {
     setIsLoading(true);
 
     try {
-      await api.delete(`/pacients/${id}`);
+      await api.delete(`/patients/${id}`);
 
       setDataPatients((prevState) => prevState.filter((patient) => patient.id !== id));
     } catch (error) {
