@@ -21,6 +21,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
           setSessionItem('@HP-Token', response.data.token);
           setUser(response.data);
           enqueueSnackbar('Login realizado com sucesso', { variant: 'success' });
+
+          navigate('/', { replace: true });
         })
         .catch((error) => {
           enqueueSnackbar('Usuário ou senha incorretos', { variant: 'error' });
@@ -28,7 +30,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
           console.log(error);
         });
     },
-    [setUser],
+    [setUser, navigate],
   );
 
   const register = useCallback(
