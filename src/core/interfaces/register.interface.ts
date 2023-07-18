@@ -9,10 +9,11 @@ export interface IRegisterResponse {
 }
 
 export interface IUser {
-  id: number;
+  id: string;
   email: string;
   password: string;
+  role: string;
   name: string;
-  created_at: string; // ISO 8601
-  updated_at: string; // ISO 8601
+  created_at: string;
+  updated_at: string;
 }

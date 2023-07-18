@@ -1,5 +1,5 @@
 export interface IPatient {
-  id: number;
+  id: string;
   age: number;
   blade: string;
   genre: 'M' | 'F';
