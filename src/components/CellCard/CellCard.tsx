@@ -11,11 +11,11 @@ type CellCardProps = {
 export const CellCard: React.FC<CellCardProps> = ({ data, isFetching, hasError }) => {
   if (isFetching) return <div>Carregando...</div>;
 
-  if (hasError) return <div>Erro ao carregar as série branca</div>;
+  if (hasError) return <div>Erro ao carregar as célula</div>;
 
   if (!data) return null;
 
-  if (data.length === 0) return <div>Nenhuma série branca cadastrada</div>;
+  if (data.length === 0) return <div>Nenhuma célula cadastrada</div>;
 
   return (
     <>
