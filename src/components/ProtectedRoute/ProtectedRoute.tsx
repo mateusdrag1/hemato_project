@@ -16,7 +16,7 @@ export const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   return (
     <div>
       <AppSidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-      <div className='md:pl-64 flex flex-col'>
+      <div className='md:pl-64 flex flex-col h-screen justify-between'>
         <AppNavbar setSidebarOpen={setSidebarOpen} />
         {children}
       </div>

@@ -56,7 +56,7 @@ export const PatientForm: React.FC<{
             Limpar campos
           </Button>
           <Button variant='primary' type='submit'>
-            Fazer cálculos e gerar laudo de lâmina
+            Adicionar Paciente
           </Button>
         </div>
       </form>

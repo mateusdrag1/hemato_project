@@ -33,7 +33,7 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
 
 export const apiSlice = createApi({
   reducerPath: 'api',
-  tagTypes: ['Patients'],
+  tagTypes: ['Patients', 'Cells', 'Categories'],
   baseQuery: baseQueryWithReauth,
   endpoints: (_builder) => ({}),
 });

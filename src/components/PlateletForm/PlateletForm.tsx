@@ -58,7 +58,7 @@ export const PlateletForm: React.FC<{
             Limpar campos
           </Button>
           <Button variant='primary' type='submit'>
-            Fazer cálculos e gerar relatório
+            Armazenar Série Plaquetária
           </Button>
         </div>
       </form>

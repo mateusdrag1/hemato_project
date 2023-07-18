@@ -8,6 +8,7 @@ import { UserCircleIcon } from '@heroicons/react/24/solid';
 import { Patients } from './Patient';
 import { Login } from './Login';
 import { Register } from './Register';
+import { Atlas } from './Atlas';
 
 interface RouteConfigProps {
   path: string;
@@ -51,6 +52,13 @@ export const routesConfig: RouteConfigProps[] = [
     path: '/plaquetas',
     component: Platelet,
     icon: CubeIcon,
+    protected: true,
+  },
+  {
+    name: 'Atlas',
+    path: '/atlas',
+    component: Atlas,
+    icon: CircleStackIcon,
     protected: true,
   },
   {

@@ -73,7 +73,7 @@ export const RBCForm: React.FC<{
             Limpar campos
           </Button>
           <Button variant='primary' type='submit'>
-            Fazer cálculos e gerar laudo de lâmina
+            Armazenar Série Vermelha
           </Button>
         </div>
       </form>

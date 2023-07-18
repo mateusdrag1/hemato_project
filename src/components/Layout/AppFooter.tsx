@@ -1,6 +1,6 @@
 const AppFooter = () => {
   return (
-    <footer className='fixed bottom-0 right-0 p-4 text-xs'>
+    <footer className='p-4 text-xs flex justify-center md:justify-end'>
       <div className='flex gap-4'>
         <p>
           Versão: <span className='text-red-500'>Beta</span>

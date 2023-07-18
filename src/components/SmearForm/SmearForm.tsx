@@ -90,7 +90,7 @@ export const SmearForm: React.FC<{
               Limpar campos
             </Button>
             <Button variant='primary' type='submit'>
-              Armazenar lâmina
+              Armazenar Série Branca
             </Button>
           </div>
         </form>
