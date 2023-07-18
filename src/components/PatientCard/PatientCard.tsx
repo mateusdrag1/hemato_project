@@ -6,7 +6,7 @@ type PatientCardProps = {
   isFetching?: boolean;
   hasError?: boolean;
 
-  handleRemove: (id: number) => void;
+  handleRemove: (id: string) => void;
 };
 
 export const PatientCard: React.FC<PatientCardProps> = ({

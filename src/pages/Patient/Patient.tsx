@@ -21,7 +21,7 @@ export const Patients: React.FC = () => {
     await createPatient(data);
   };
 
-  const removeSmear = async (id: number) => {
+  const removeSmear = async (id: string) => {
     await deletePatient({
       id,
     });

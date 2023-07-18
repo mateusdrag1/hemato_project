@@ -7,7 +7,7 @@ import { CreateSmearFormData } from '@/components/SmearForm/validate';
 import { CreatePlateletFormData } from '@/components/PlateletForm/validate';
 
 export const patient: IPatient = {
-  id: 0,
+  id: '0',
   blade: '0000000000001',
   age: 1,
   genre: 'M',
