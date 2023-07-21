@@ -9,6 +9,7 @@ import { Patients } from './Patient';
 import { Login } from './Login';
 import { Register } from './Register';
 import { Atlas } from './Atlas';
+import { Privacy } from './Privacy';
 
 interface RouteConfigProps {
   path: string;
@@ -72,6 +73,13 @@ export const routesConfig: RouteConfigProps[] = [
     name: 'Register',
     path: '/register',
     component: Register,
+    icon: CircleStackIcon,
+    protected: false,
+  },
+  {
+    name: 'Privacy',
+    path: '/politica-de-privacidade',
+    component: Privacy,
     icon: CircleStackIcon,
     protected: false,
   },
