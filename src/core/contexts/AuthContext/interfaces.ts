@@ -1,7 +1,15 @@
 import { IRegisterRequest } from '@/core/interfaces/register.interface';
 
 interface User {
-  name: string;
+  user: {
+    id: string;
+    email: string;
+    password: string;
+    name: string;
+    role: string;
+    created_at: string;
+    updated_at: string;
+  };
   token: string;
 }
 

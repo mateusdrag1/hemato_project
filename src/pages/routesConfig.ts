@@ -1,15 +1,22 @@
-import { BookmarkIcon, CircleStackIcon, CubeIcon, HomeIcon } from '@heroicons/react/24/outline';
+import {
+  BookmarkIcon,
+  CircleStackIcon,
+  CubeIcon,
+  HomeIcon,
+  VideoCameraIcon,
+} from '@heroicons/react/24/outline';
 
-import { WBC } from './WBC';
-import { Platelet } from './Platelet';
-import { Dashboard } from './Dashboard';
-import { RBC } from './RBC';
 import { UserCircleIcon } from '@heroicons/react/24/solid';
-import { Patients } from './Patient';
-import { Login } from './Login';
-import { Register } from './Register';
 import { Atlas } from './Atlas';
+import { Dashboard } from './Dashboard';
+import { Login } from './Login';
+import { Patients } from './Patient';
+import { Platelet } from './Platelet';
 import { Privacy } from './Privacy';
+import { RBC } from './RBC';
+import { Register } from './Register';
+import { Scanner } from './Scanner';
+import { WBC } from './WBC';
 
 interface RouteConfigProps {
   path: string;
@@ -60,6 +67,13 @@ export const routesConfig: RouteConfigProps[] = [
     path: '/atlas',
     component: Atlas,
     icon: CircleStackIcon,
+    protected: true,
+  },
+  {
+    name: 'Scanner',
+    path: '/scanner',
+    component: Scanner,
+    icon: VideoCameraIcon,
     protected: true,
   },
   {

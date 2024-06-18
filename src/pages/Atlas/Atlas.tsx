@@ -2,6 +2,7 @@ import { CellForm } from '@/components/AtlasForm';
 import { CreateCellFormData } from '@/components/AtlasForm/validate';
 import { CellCard } from '@/components/CellCard';
 import AppContainer from '@/components/Layout/AppContainer';
+import { useAuth } from '@/core/contexts';
 import { useGetCategoriesQuery } from '@/features/categories/categorySlice';
 
 import { useCreateCellMutation, useGetCellsQuery } from '@/features/cells/cellSlice';
@@ -13,6 +14,8 @@ const Atlas: React.FC = () => {
   const { data, isFetching } = useGetCellsQuery();
   const { data: categoriesData } = useGetCategoriesQuery();
   const [createCell, createCellStatus] = useCreateCellMutation();
+
+  const { user } = useAuth();
 
   const handleSubmit = async (data: CreateCellFormData) => {
     const reader = new FileReader();
@@ -45,7 +48,9 @@ const Atlas: React.FC = () => {
 
   return (
     <AppContainer title='Atlas'>
-      <CellForm onSubmit={handleSubmit} categories={categoriesData?.categories || []} />
+      {user!.user.role === 'ADMIN' && (
+        <CellForm onSubmit={handleSubmit} categories={categoriesData?.categories || []} />
+      )}
 
       <div className='md:grid md:grid-cols-3 md:gap-6'>
         <CellCard data={data?.cells} isFetching={isFetching} />
