@@ -1,8 +1,8 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { FormProvider, useForm } from 'react-hook-form';
-import { LoginFormData, loginFormSchema } from './validate';
 import { Form } from '@/components/Form';
 import { useAuth } from '@/core/contexts/AuthContext';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { FormProvider, useForm } from 'react-hook-form';
+import { type LoginFormData, loginFormSchema } from './validate';
 
 export const Login = () => {
   const { login } = useAuth();
@@ -19,10 +19,10 @@ export const Login = () => {
   };
 
   return (
-    <div className='min-h-screen flex items-center justify-center '>
-      <div className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-96 space-y-6'>
+    <div className='flex justify-center items-center min-h-screen'>
+      <div className='space-y-6 bg-white shadow-md mb-4 px-8 pt-6 pb-8 rounded w-96'>
         <div>
-          <img className='mx-auto h-12 w-auto' src='/LogoHemato.svg' alt='Hematopedia' />
+          <img className='mx-auto w-auto h-12' src='/LogoHemato.svg' alt='Hematopedia' />
         </div>
         <FormProvider {...loginForm}>
           <form
@@ -40,9 +40,9 @@ export const Login = () => {
               <Form.Input type='password' name='password' />
               <Form.ErrorMessage field='password' />
             </Form.Field>
-            <div className='flex items-center justify-center'>
+            <div className='flex justify-center items-center'>
               <button
-                className='bg-red-500 hover:bg-red-700 duration-200 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+                className='bg-red-500 hover:bg-red-700 focus:shadow-outline px-4 py-2 rounded font-bold text-white duration-200 focus:outline-none'
                 type='submit'
               >
                 Entrar
@@ -50,8 +50,8 @@ export const Login = () => {
             </div>
           </form>
         </FormProvider>
-        <div className='text-center mt-4'>
-          <a className='inline-block text-sm text-gray-600 hover:text-gray-800' href='/register'>
+        <div className='mt-4 text-center'>
+          <a className='inline-block text-gray-600 text-sm hover:text-gray-800' href='/register'>
             Registrar-se
           </a>
         </div>

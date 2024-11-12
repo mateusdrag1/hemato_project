@@ -1,6 +1,6 @@
 import { clearLocalStorage } from '@/core/helpers/localStorage';
 import { clearSession, getSessionItem } from '@/core/helpers/session';
-import axios, { InternalAxiosRequestConfig } from 'axios';
+import axios, { type InternalAxiosRequestConfig } from 'axios';
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL as string,

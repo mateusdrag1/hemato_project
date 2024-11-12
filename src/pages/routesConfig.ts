@@ -9,6 +9,7 @@ import {
 import { UserCircleIcon } from '@heroicons/react/24/solid';
 import { Atlas } from './Atlas';
 import { Dashboard } from './Dashboard';
+import { DeleteAccount } from './DeleteAccount';
 import { Login } from './Login';
 import { Patients } from './Patient';
 import { Platelet } from './Platelet';
@@ -94,6 +95,13 @@ export const routesConfig: RouteConfigProps[] = [
     name: 'Privacy',
     path: '/politica-de-privacidade',
     component: Privacy,
+    icon: CircleStackIcon,
+    protected: false,
+  },
+  {
+    name: 'DeleteAccount',
+    path: '/deletar-conta',
+    component: DeleteAccount,
     icon: CircleStackIcon,
     protected: false,
   },
